@@ -1,23 +1,22 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-   before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   def new
-    puts "here!"
+    puts 'here!'
     super
-    puts "after super"
+    puts 'after super'
   end
 
   # POST /resource
   def create
+    puts "params1 are: #{params}"
     super
-    puts "-------------------------------------------------------------here---------------------------------------------"
-    if params[:seller]
-      puts "user is a seller"
-    end
+    puts '-------------------------------------------------------------here---------------------------------------------'
+    puts 'user is a seller' if @user.seller
   end
 
   # GET /resource/edit
@@ -27,7 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    puts "in update"
+    puts 'in update'
     super
   end
 
@@ -49,12 +48,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :seller])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name seller])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :seller])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name seller])
   end
 
   # The path used after sign up.
