@@ -2,14 +2,13 @@
 <h1>Patterns</h1>
 <% if user_signed_in? && current_user.seller %>
   <%= link_to 'New Pattern', new_pattern_path %>
-<% end %>
-
-
-<%  if current_user.seller && current_user.patterns %>
-  <h2>Your Patterns</h2>
-  <% user_patterns = current_user.patterns.all %>
-  <%# <%= render 'patterns', pattern: user_patterns %>
-  <%= render partial: "patterns", object: user_patterns, as: 'patterns' %>
+  
+  <%  if current_user.patterns.any? %>
+    <h2>Your Patterns</h2>
+    <% user_patterns = current_user.patterns.all %>
+    <%# <%= render 'patterns', pattern: user_patterns %>
+    <%= render partial: "patterns", object: user_patterns, as: 'patterns' %>
+  <% end %>
 <% end %>
 
 <h2>All Patterns</h2>
