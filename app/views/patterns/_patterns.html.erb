@@ -1,0 +1,45 @@
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Sizes</th>
+      <th>Fabric</th>
+      <th>Fabric amount</th>
+      <th>Garment</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Difficulty</th>
+      <th>Notions</th>
+      <th>Complete</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% patterns.each do |pattern| %>
+      <% if pattern.complete or (user_signed_in? && current_user.id == pattern.user_id) %>
+      <tr>
+        <td><%= User.find(pattern.user_id).username %></td>
+        <td><%= pattern.name %></td>
+        <td><%= pattern.sizes %></td>
+        <td><%= pattern.fabric %></td>
+        <td><%= pattern.fabric_amount %></td>
+        <td><%= pattern.garment %></td>
+        <td><%= pattern.category %></td>
+        <td><%= pattern.price %></td>
+        <td><%= pattern.description %></td>
+        <td><%= pattern.difficulty %></td>
+        <td><%= pattern.notions %></td>
+        <td><%= pattern.complete %></td>
+        <td><%= link_to 'Show', pattern %></td>
+        <td><%= link_to 'Edit', edit_pattern_path(pattern) %></td>
+        <td><%= link_to 'Destroy', pattern, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <%end%>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
