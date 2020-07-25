@@ -16,8 +16,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     puts "params1 are: #{params}"
     super
     puts '-------------------------------------------------------------here---------------------------------------------'
-    puts 'user is a seller' if @user.sellersewfar
-    
+    puts 'user is a seller' if @user.seller
+
   end
 
   # GET /resource/edit
@@ -49,12 +49,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name seller])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name seller username])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[name seller])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name seller username])
   end
 
   # The path used after sign up.

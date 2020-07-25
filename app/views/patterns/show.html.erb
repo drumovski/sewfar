@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
-  <%= @pattern.user_id %>
+  <strong>Username:</strong>
+  <%= User.find(@pattern.user_id).username %>
 </p>
 
 <p>
@@ -61,4 +61,5 @@
 </p>
 
 <%= link_to 'Edit', edit_pattern_path(@pattern) %> |
-<%= link_to 'Back', patterns_path %>
+<%= link_to 'New', new_pattern_path %>
+<%= link_to 'Home', patterns_path %>

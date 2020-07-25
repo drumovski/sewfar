@@ -9,7 +9,7 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
+      <th>Username</th>
       <th>Name</th>
       <th>Sizes</th>
       <th>Fabric</th>
@@ -26,9 +26,11 @@
   </thead>
 
   <tbody>
+    
     <% @patterns.each do |pattern| %>
+      <% if pattern.complete or (user_signed_in? && current_user.id == pattern.user_id) %>
       <tr>
-        <td><%= pattern.user_id %></td>
+        <td><%= User.find(pattern.user_id).username %></td>
         <td><%= pattern.name %></td>
         <td><%= pattern.sizes %></td>
         <td><%= pattern.fabric %></td>
@@ -44,6 +46,7 @@
         <td><%= link_to 'Edit', edit_pattern_path(pattern) %></td>
         <td><%= link_to 'Destroy', pattern, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <%end%>
     <% end %>
   </tbody>
 </table>
