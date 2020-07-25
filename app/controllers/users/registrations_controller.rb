@@ -16,7 +16,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     puts "params1 are: #{params}"
     super
     puts '-------------------------------------------------------------here---------------------------------------------'
-    puts 'user is a seller' if @user.seller
+    puts 'user is a seller' if @user.sellersewfar
+    
   end
 
   # GET /resource/edit
