@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @pattern.user_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @pattern.name %>
+</p>
+
+<p>
+  <strong>Sizes:</strong>
+  <%= @pattern.sizes %>
+</p>
+
+<p>
+  <strong>Fabric:</strong>
+  <%= @pattern.fabric %>
+</p>
+
+<p>
+  <strong>Fabric amount:</strong>
+  <%= @pattern.fabric_amount %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @pattern.type %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @pattern.category %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @pattern.price %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @pattern.description %>
+</p>
+
+<p>
+  <strong>Difficulty:</strong>
+  <%= @pattern.difficulty %>
+</p>
+
+<p>
+  <strong>Notions:</strong>
+  <%= @pattern.notions %>
+</p>
+
+<p>
+  <strong>Complete:</strong>
+  <%= @pattern.complete %>
+</p>
+
+<%= link_to 'Edit', edit_pattern_path(@pattern) %> |
+<%= link_to 'Back', patterns_path %>

@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  name: MyString
+  sizes: MyString
+  fabric: MyString
+  fabric_amount: 1
+  type: 1
+  category: 1
+  price: 1.5
+  description: MyText
+  difficulty: 1
+  notions: MyText
+  complete: false
+
+two:
+  user: two
+  name: MyString
+  sizes: MyString
+  fabric: MyString
+  fabric_amount: 1
+  type: 1
+  category: 1
+  price: 1.5
+  description: MyText
+  difficulty: 1
+  notions: MyText
+  complete: false

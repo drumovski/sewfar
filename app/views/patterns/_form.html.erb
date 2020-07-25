@@ -1,0 +1,77 @@
+<%= form_with(model: pattern, local: true) do |form| %>
+  <% if pattern.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pattern.errors.count, "error") %> prohibited this pattern from being saved:</h2>
+
+      <ul>
+        <% pattern.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sizes %>
+    <%= form.text_field :sizes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fabric %>
+    <%= form.text_field :fabric %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fabric_amount %>
+    <%= form.number_field :fabric_amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.number_field :type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.number_field :category %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :difficulty %>
+    <%= form.number_field :difficulty %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notions %>
+    <%= form.text_area :notions %>
+  </div>
+
+  <div class="field">
+    <%= form.label :complete %>
+    <%= form.check_box :complete %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
