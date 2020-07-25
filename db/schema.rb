@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_25_010609) do
+ActiveRecord::Schema.define(version: 2020_07_25_025258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_07_25_010609) do
     t.string "sizes"
     t.string "fabric"
     t.integer "fabric_amount"
-    t.integer "type"
+    t.integer "garment"
     t.integer "category"
     t.float "price"
     t.text "description"

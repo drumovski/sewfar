@@ -24,8 +24,8 @@ class PatternsController < ApplicationController
   # POST /patterns
   # POST /patterns.json
   def create
-    @pattern = Pattern.new(pattern_params)
-
+    # @pattern = Pattern.new(pattern_params)
+    @pattern = current_user.patterns.create(pattern_params)
     respond_to do |format|
       if @pattern.save
         format.html { redirect_to @pattern, notice: 'Pattern was successfully created.' }
@@ -69,6 +69,6 @@ class PatternsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pattern_params
-      params.require(:pattern).permit(:user_id, :name, :sizes, :fabric, :fabric_amount, :type, :category, :price, :description, :difficulty, :notions, :complete)
+      params.require(:pattern).permit(:name, :sizes, :fabric, :fabric_amount, :garment, :category, :price, :description, :difficulty, :notions, :complete)
     end
 end
