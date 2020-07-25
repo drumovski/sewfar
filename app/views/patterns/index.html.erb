@@ -6,7 +6,6 @@
   <%  if current_user.patterns.any? %>
     <h2>Your Patterns</h2>
     <% user_patterns = current_user.patterns.all %>
-    <%# <%= render 'patterns', pattern: user_patterns %>
     <%= render partial: "patterns", object: user_patterns, as: 'patterns' %>
   <% end %>
 <% end %>
