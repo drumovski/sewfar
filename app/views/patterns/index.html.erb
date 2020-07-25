@@ -2,6 +2,10 @@
 
 <h1>Patterns</h1>
 
+<% if user_signed_in? && current_user.seller %>
+<%= link_to 'New Pattern', new_pattern_path %>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -46,4 +50,3 @@
 
 <br>
 
-<%= link_to 'New Pattern', new_pattern_path %>
