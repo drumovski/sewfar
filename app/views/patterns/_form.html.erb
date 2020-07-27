@@ -58,7 +58,8 @@
 
   <div class="field">
     <%= form.label :difficulty %>
-    <%= form.number_field :difficulty %>
+    <%# <%= form.number_field :difficulty %>
+    <%= form.select :difficulty, ['easy', 'medium', 'hard'] %>
   </div>
 
   <div class="field">
