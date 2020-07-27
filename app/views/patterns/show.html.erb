@@ -27,7 +27,7 @@
 
 <p>
   <strong>Garment:</strong>
-  <%= @pattern.garment %>
+  <%= Garment.find(@pattern.garment_id).name %>
 </p>
 
 <p>

@@ -26,7 +26,7 @@
         <td><%= pattern.sizes %></td>
         <td><%= pattern.fabric %></td>
         <td><%= pattern.fabric_amount %></td>
-        <td><%= pattern.garment %></td>
+        <td><%= Garment.find(pattern.garment_id).name %></td>
         <td><%= pattern.category %></td>
         <td><%= pattern.price %></td>
         <td><%= pattern.description %></td>

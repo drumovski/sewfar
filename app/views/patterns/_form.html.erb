@@ -38,7 +38,8 @@
 
   <div class="field">
     <%= form.label :garment %>
-    <%= form.number_field :garment %>
+    <%# <% form.number_field :garment_id %>
+    <%= collection_select :pattern, :garment_id, Garment.all, :id, :name %>
   </div>
 
   <div class="field">
@@ -58,7 +59,6 @@
 
   <div class="field">
     <%= form.label :difficulty %>
-    <%# <%= form.number_field :difficulty %>
     <%= form.select :difficulty, ['easy', 'medium', 'hard'] %>
   </div>
 
