@@ -1,8 +1,11 @@
 <p id="notice"><%= notice %></p>
 <h1>Patterns</h1>
+
+<%# show only if current user is a seller and signed in %>
 <% if user_signed_in? && current_user.seller %>
   <%= link_to 'New Pattern', new_pattern_path %>
   
+  <%# show patterns if the current seller has patterns they have created %>
   <%  if current_user.patterns.any? %>
     <h2>Your Patterns</h2>
     <% user_patterns = current_user.patterns.all %>
@@ -10,6 +13,6 @@
   <% end %>
 <% end %>
 
+<%# show all patterns %>
 <h2>All Patterns</h2>
-<%# <%= render 'patterns', patterns: @pattern %>
 <%= render partial: "patterns", object: @patterns, as: 'patterns' %>
