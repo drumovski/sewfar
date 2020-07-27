@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sellers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Business name</th>
+      <th>Abn</th>
+      <th>Website</th>
+      <th>Facebook</th>
+      <th>Twitter</th>
+      <th>Linkedin</th>
+      <th>Instagram</th>
+      <th>About</th>
+      <th>Address line 1</th>
+      <th>Address line 2</th>
+      <th>City</th>
+      <th>Postcode</th>
+      <th>Country</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sellers.each do |seller| %>
+      <tr>
+        <td><%= seller.business_name %></td>
+        <td><%= seller.abn %></td>
+        <td><%= seller.website %></td>
+        <td><%= seller.facebook %></td>
+        <td><%= seller.twitter %></td>
+        <td><%= seller.linkedin %></td>
+        <td><%= seller.instagram %></td>
+        <td><%= seller.about %></td>
+        <td><%= seller.address_line_1 %></td>
+        <td><%= seller.address_line_2 %></td>
+        <td><%= seller.city %></td>
+        <td><%= seller.postcode %></td>
+        <td><%= seller.country %></td>
+        <td><%= link_to 'Show', seller %></td>
+        <td><%= link_to 'Edit', edit_seller_path(seller) %></td>
+        <td><%= link_to 'Destroy', seller, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Seller', new_seller_path %>

@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Business name:</strong>
+  <%= @seller.business_name %>
+</p>
+
+<p>
+  <strong>Abn:</strong>
+  <%= @seller.abn %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @seller.website %>
+</p>
+
+<p>
+  <strong>Facebook:</strong>
+  <%= @seller.facebook %>
+</p>
+
+<p>
+  <strong>Twitter:</strong>
+  <%= @seller.twitter %>
+</p>
+
+<p>
+  <strong>Linkedin:</strong>
+  <%= @seller.linkedin %>
+</p>
+
+<p>
+  <strong>Instagram:</strong>
+  <%= @seller.instagram %>
+</p>
+
+<p>
+  <strong>About:</strong>
+  <%= @seller.about %>
+</p>
+
+<p>
+  <strong>Address line 1:</strong>
+  <%= @seller.address_line_1 %>
+</p>
+
+<p>
+  <strong>Address line 2:</strong>
+  <%= @seller.address_line_2 %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @seller.city %>
+</p>
+
+<p>
+  <strong>Postcode:</strong>
+  <%= @seller.postcode %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @seller.country %>
+</p>
+
+<%= link_to 'Edit', edit_seller_path(@seller) %> |
+<%= link_to 'Back', sellers_path %>
