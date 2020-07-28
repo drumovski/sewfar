@@ -1,6 +1,7 @@
 class PatternsController < ApplicationController
   before_action :set_pattern, only: [:show, :edit, :update, :destroy]
   before_action :authorise_change, only: [:edit, :update, :destroy]
+  before_action :authorise_new, only: [:new, :create]
 
   # GET /patterns
   # GET /patterns.json
@@ -72,7 +73,12 @@ class PatternsController < ApplicationController
       if @pattern.user_id != current_user.id
         redirect_to patterns_path
       end
+    end
 
+    def authorise_new
+      if !current_user.is_seller
+         redirect_to patterns_path
+      end
     end
 
     # Only allow a list of trusted parameters through.

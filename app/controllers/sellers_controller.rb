@@ -29,6 +29,7 @@ class SellersController < ApplicationController
     respond_to do |format|
       if @seller.save
         current_user.is_seller = true
+        current_user.save
         format.html { redirect_to @seller, notice: 'Seller was successfully created.' }
         format.json { render :show, status: :created, location: @seller }
       else
@@ -41,10 +42,10 @@ class SellersController < ApplicationController
   # PATCH/PUT /sellers/1
   # PATCH/PUT /sellers/1.json
   def update
-    @seller.user_id = current_user.id
     respond_to do |format|
       if @seller.update(seller_params)
         current_user.is_seller = true
+        current_user.save
         format.html { redirect_to @seller, notice: 'Seller was successfully updated.' }
         format.json { render :show, status: :ok, location: @seller }     
       else

@@ -60,6 +60,8 @@
   <%= @pattern.complete %>
 </p>
 
-<%= link_to 'Edit', edit_pattern_path(@pattern) %> |
-<%= link_to 'New', new_pattern_path %>
+<% if current_user.id == @pattern.user_id %>
+  <%= link_to 'Edit', edit_pattern_path(@pattern) %> |
+  <%= link_to 'New', new_pattern_path %>
+  <% end %>
 <%= link_to 'Home', patterns_path %>
