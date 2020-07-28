@@ -23,13 +23,14 @@ class SellersController < ApplicationController
 
   # POST /sellers
   # POST /sellers.json
-  def create
+  def create    
     @seller = Seller.new(seller_params)
-
+    @seller.user_id = current_user.id
     respond_to do |format|
       if @seller.save
         format.html { redirect_to @seller, notice: 'Seller was successfully created.' }
         format.json { render :show, status: :created, location: @seller }
+        current_user.is_seller = true
       else
         format.html { render :new }
         format.json { render json: @seller.errors, status: :unprocessable_entity }

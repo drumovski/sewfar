@@ -1,2 +1,3 @@
 class Seller < ApplicationRecord
-end
+    belongs_to :user
+end 

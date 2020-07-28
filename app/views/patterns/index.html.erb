@@ -2,7 +2,7 @@
 <h1>Patterns</h1>
 
 <%# show only  current user is a seller and signed in %>
-<% if user_signed_in? && current_user.seller %>
+<% if user_signed_in? && current_user.is_seller %>
   <%= link_to 'New Pattern', new_pattern_path %>
   
   <%# show patterns if the current seller has patterns they have created %>

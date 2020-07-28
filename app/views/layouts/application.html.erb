@@ -13,6 +13,9 @@
     <% if user_signed_in? %>
       <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
       <%= link_to "Edit account", edit_user_registration_path %>
+      <% if !current_user.is_seller %>
+        <%= link_to "Sell your patterns!", new_seller_path %>
+        <% end %>
     <% else %>
       <%= link_to "Log in", new_user_session_path %>
       <%= link_to "Sign up", new_user_registration_path %>
