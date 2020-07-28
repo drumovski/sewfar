@@ -5,67 +5,99 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+def populate_garments
+    i=0
+    garment_names = ['apron', 'bikini', 'bodysuit', 'braces', 'cardigan', 'chaps', 'chuddah', 'coat', 'codpiece', 
+        'cummerbund' 'dress', 'dressing gown', 'dungarees', 'footwear', 'garter', 'gloves', 'gown', 'halter', 'hat', 'jacket',
+        'jerkin', 'jubbah', 'jumper', 'jump suit', 'kaftan', 'kimono', 'kilt', 'leotard', 'mask', 'mittens', 'negligee',
+        'nightgown', 'nightshirt', 'overalls', 'overcoat', 'overskirt', 'pullover', 'pyjamas', 'robe', 'sash', 'sari', 'sarong',
+        'shalwar', 'shawl', 'shirt', 'skivvy', 'smock', 'socks', 'sweater', 'swimming costume', 'tank top', 'thong', 'tie',
+        'tights', 'toga', 'T-shirt', 'undergarment', 'waistcoat', 'yashmak'
+    ]
+    garments = []
+    garment_names.each do |g|
+        garments << {name: g}
+        puts "added #{g}"
+        i += 1
+    end
+    Garment.create(garments)
+    puts "created #{i} garments"
+end
+
+
+
+
+
+def populate_users
+     people = ["zeb", "jake", "carl", "john", "harry", "phil", "mary", "sue", "jill", "jenny", "karen", "gwen", "chantel", "aria", "marshall"]
+     people.each do |n|
+        e = "#{n}@#{n}.com"
+        puts "created user #{n}"
+        user = User.new(
+        :name                  => n,
+        :username              => n,
+        :email                 => e,
+        :password              => "123456",
+        :password_confirmation => "123456"
+         )
+        user.save!
+     end
+end
+
+def populate_sellers
+    people = ["zeb", "jake", "carl", "john", "harry", "chantel"]
+    people.each do |n|
+        puts "created seller #{n}"
+        seller = Seller.new(
+        :business_name         => "#{n}'s shop",
+        :abn                   => "239482743",
+        :website               => "www.#{n}shop.com",
+        :twitter               => "@#{n}",
+        :linkedin              => "#{n}@linkedin",
+        :about                 => "I have a shop and I'm really cool at sewing",
+        :address_line_1        => "12A fake st",
+        :address_line_2        => "Yarraville",
+        :country               => "Australia",
+        :user_id               => User.find_by(name: n).id
+         )
+        seller.save!
+        u = User.find_by(name: n)
+        u.is_seller = true
+        u.save!
+     end
+end
+
+def populate_patterns
+    people = ["zeb", "zeb", "zeb", "zeb", "jake", "jake", "jake", "carl", "carl", "john" ]
+    i = 1
+    people.each do |n|
+      puts "pattern created by #{n}"
+      pattern = Pattern.new(
+        :name                => "#{n}'s shop pattern #{i}",
+        :sizes               => "#{rand(10)} - #{rand(24)}",
+        :fabric              => "cotton and latex",
+        :fabric_amount       => rand(500),
+        :category            => rand(5),
+        :price               => rand(20),
+        :description         => "A really cool pattern that you are going to love",
+        :difficulty          => rand(3),
+        :notions             => "2 buttons",
+        :garment_id          => rand(55),
+        :complete            => true,
+        :user_id             => User.find_by(name: n).id
+         )
+        pattern.save!
+        i += 1
+     end
+end
+
 Garment.delete_all
-Garment.create([
-    { name: 'apron' },
-    { name: 'bikni' },
-    { name: 'bodysuit' },
-    { name: 'braces' },
-    { name: 'cardigan' },
-    { name: 'chaps' },
-    { name: 'chuddah' },
-    { name: 'coat' },
-    { name: 'codpiece' },
-    { name: 'cummerbund' },
-    { name: 'dress' },
-    { name: 'dressing gown' },
-    { name: 'dungarees' },
-    { name: 'garter' },
-    { name: 'gloves' },
-    { name: 'gown' },
-    { name: 'halter' },
-    { name: 'hat' },
-    { name: 'jacket' },
-    { name: 'jerkin' },
-    { name: 'jubbah' },
-    { name: 'jumper' },
-    { name: 'jump suit' },
-    { name: 'kaftan' },
-    { name: 'kimono' },
-    { name: 'kilt' },
-    { name: 'leotard' },
-    { name: 'mask' },
-    { name: 'mittens' },
-    { name: 'negligee' },
-    { name: 'nightgown' },
-    { name: 'nightshirt' },
-    { name: 'overalls' },
-    { name: 'overcoat' },
-    { name: 'overskirt' },
-    { name: 'pullover' },
-    { name: 'pyjamas' },
-    { name: 'robe' },
-    { name: 'sash' },
-    { name: 'sari' },
-    { name: 'sarong' },
-    { name: 'shalwar' },
-    { name: 'shawl' },
-    { name: 'shirt' },
-    { name: 'shoe' },
-    { name: 'shorts' },
-    { name: 'skirt' },
-    { name: 'skivvy' },
-    { name: 'smock' },
-    { name: 'socks' },
-    { name: 'sweater' },
-    { name: 'swimming costume' },
-    { name: 'tank top' },
-    { name: 'thong' },
-    { name: 'tie' },
-    { name: 'tights' },
-    { name: 'toga' },
-    { name: 'T-shirt' },
-    { name: 'undergarment' },
-    { name: 'waistcoat' },
-    { name: 'yashmak' },
-])
+User.delete_all
+Seller.delete_all
+Pattern.delete_all
+populate_garments
+populate_users
+populate_sellers
+populate_patterns
