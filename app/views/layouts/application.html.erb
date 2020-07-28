@@ -11,10 +11,12 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <% if user_signed_in? %>
+      <p>Welcome <%= current_user.name %></p>
+      <p>User is seller? <%= current_user.is_seller %></p>
       <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
       <%= link_to "Edit account", edit_user_registration_path %>
       <% if !current_user.is_seller %>
-        <%= link_to "Sell your patterns!", new_seller_path %>
+        <%= link_to "Become a seller", new_seller_path %>
         <% end %>
     <% else %>
       <%= link_to "Log in", new_user_session_path %>

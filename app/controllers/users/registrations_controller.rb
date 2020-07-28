@@ -6,18 +6,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    puts 'here!'
     super
-    puts 'after super'
   end
 
   # POST /resource
   def create
-    puts "params1 are: #{params}"
     super
-    puts '-------------------------------------------------------------here---------------------------------------------'
-    puts 'user is a seller' if @user.is_seller
-
   end
 
   # GET /resource/edit
@@ -49,12 +43,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name is_seller username])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name username])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[name is_seller username])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name username])
   end
 
   # The path used after sign up.
