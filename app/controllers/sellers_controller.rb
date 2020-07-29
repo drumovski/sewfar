@@ -31,8 +31,8 @@ class SellersController < ApplicationController
     @seller.user_id = current_user.id
     respond_to do |format|
       if @seller.save
-        current_user.is_seller = true
-        current_user.save
+        @seller.user.is_seller = true
+        @seller.user.save
         format.html { redirect_to @seller, notice: 'Seller was successfully created.' }
         format.json { render :show, status: :created, location: @seller }
       else
@@ -47,8 +47,8 @@ class SellersController < ApplicationController
   def update
     respond_to do |format|
       if @seller.update(seller_params)
-        current_user.is_seller = true
-        current_user.save
+        @seller.user.is_seller = true
+        @seller.user.save
         format.html { redirect_to @seller, notice: 'Seller was successfully updated.' }
         format.json { render :show, status: :ok, location: @seller }     
       else
@@ -61,14 +61,15 @@ class SellersController < ApplicationController
   # DELETE /sellers/1
   # DELETE /sellers/1.json
   def destroy
-    @seller.destroy
-    current_user.is_seller = false
-    current_user.save
+    # @user = User.find(@seller.id)
+    @seller.user.is_seller = false
+    @seller.user.save
     # User::make_patterns_free
-    current_user.patterns.each do |pattern|
+    @seller.user.patterns.each do |pattern|
       pattern.price = 0
       pattern.save
     end
+    @seller.destroy
     respond_to do |format|
       format.html { redirect_to patterns_path, notice: 'Seller was successfully destroyed.' }
       format.json { head :no_content }
@@ -88,8 +89,10 @@ class SellersController < ApplicationController
     end
 
     def authorise_index
-      if !current_user.admin
-        redirect_to patterns_path
+      if user_signed_in? 
+        if !current_user.admin
+          redirect_to patterns_path
+        end
      end
     end
 

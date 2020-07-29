@@ -27,10 +27,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource
   def destroy
-    current_user.active = false
-    current_user.save
-    resource.soft_delete
-    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    @user.soft_delete
+    if !@user.admin
+      Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    end
     set_flash_message :notice, :destroyed
     yield resource if block_given?
     respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
