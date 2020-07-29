@@ -7,4 +7,11 @@ class User < ApplicationRecord
   has_many :patterns
   has_one :seller
 
+  # def self.make_patterns_free
+  #   current_user.patterns.each do |pattern|
+  #     pattern.price = 0
+  #   end
+  #   current_user.save
+  # end
+
 end

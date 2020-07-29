@@ -55,12 +55,8 @@
   <%= @pattern.notions %>
 </p>
 
-<p>
-  <strong>Complete:</strong>
-  <%= @pattern.complete %>
-</p>
 
-<% if current_user.id == @pattern.user_id %>
+<% if user_signed_in? && current_user.id == @pattern.user_id && current_user.is_seller %>
   <%= link_to 'Edit', edit_pattern_path(@pattern) %> |
   <%= link_to 'New', new_pattern_path %>
   <% end %>

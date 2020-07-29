@@ -2,6 +2,7 @@ class PatternsController < ApplicationController
   before_action :set_pattern, only: [:show, :edit, :update, :destroy]
   before_action :authorise_change, only: [:edit, :update, :destroy]
   before_action :authorise_new, only: [:new, :create]
+  before_action :authorise_destroy, only: [:destroy]
 
   # GET /patterns
   # GET /patterns.json
@@ -70,8 +71,14 @@ class PatternsController < ApplicationController
     end
 
     def authorise_change
-      if @pattern.user_id != current_user.id
+      if (@pattern.user_id != current_user.id) || !current_user.is_seller
         redirect_to patterns_path
+      end
+    end
+
+    def authorise_destroy
+       if  @pattern.complete
+         redirect_to patterns_path
       end
     end
 

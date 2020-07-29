@@ -2,5 +2,6 @@
 
 <%= render 'form', seller: @seller %>
 
+<%= link_to 'Delete your seller account', seller_path, method: :delete, data: { confirm: 'You will render all your patterns free, Are you sure?' } %> 
 <%= link_to 'Show', @seller %> |
 <%= link_to 'Back', sellers_path %>

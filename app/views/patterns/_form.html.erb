@@ -62,10 +62,12 @@
     <%= form.text_area :notions %>
   </div>
 
+  <% if !pattern.complete %>
   <div class="field">
     <%= form.label :complete %>
     <%= form.check_box :complete %>
   </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

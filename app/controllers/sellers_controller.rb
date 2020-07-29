@@ -59,10 +59,18 @@ class SellersController < ApplicationController
   # DELETE /sellers/1.json
   def destroy
     @seller.destroy
+    current_user.is_seller = false
+    current_user.save
+    # User::make_patterns_free
+    current_user.patterns.each do |pattern|
+      pattern.price = 0
+      pattern.save
+    end
     respond_to do |format|
-      format.html { redirect_to sellers_url, notice: 'Seller was successfully destroyed.' }
+      format.html { redirect_to patterns_path, notice: 'Seller was successfully destroyed.' }
       format.json { head :no_content }
     end
+    
   end
 
   private
