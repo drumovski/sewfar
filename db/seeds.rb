@@ -95,7 +95,7 @@ def populate_patterns
         :description         => "A really cool pattern that you are going to love",
         :difficulty          => rand(3),
         :notions             => "2 buttons",
-        :garment_id          => rand(55),
+        :garment_id          => rand(57)+1,
         :complete            => true,
         :user_id             => User.find_by(name: n).id
          )

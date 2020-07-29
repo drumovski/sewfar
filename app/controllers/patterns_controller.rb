@@ -77,13 +77,13 @@ class PatternsController < ApplicationController
     end
 
     def authorise_destroy
-       if  @pattern.complete || current_user.admin
+       if  @pattern.complete && !current_user.admin
          redirect_to patterns_path
       end
     end
 
     def authorise_new
-      if !current_user.is_seller || current_user.admin
+      if !current_user.is_seller
          redirect_to patterns_path
       end
     end
