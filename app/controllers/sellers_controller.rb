@@ -1,5 +1,7 @@
 class SellersController < ApplicationController
   before_action :set_seller, only: [:show, :edit, :update, :destroy]
+  before_action :authorise_index, only: [:index]
+  before_action :authorise_change, only: [:show, :edit, :update, :destroy]
 
   # GET /sellers
   # GET /sellers.json
@@ -82,5 +84,17 @@ class SellersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def seller_params
       params.require(:seller).permit(:business_name, :abn, :website, :facebook, :twitter, :linkedin, :instagram, :about, :address_line_1, :address_line_2, :city, :postcode, :country)
+    end
+
+    def authorise_index
+      if !current_user.admin
+        redirect_to patterns_path
+     end
+    end
+
+    def authorise_change
+      if (@seller.user_id != current_user.id || current_user.admin)
+        redirect_to patterns_path
+      end
     end
 end

@@ -26,9 +26,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    current_user.active = false
+    current_user.save
+    # User::make_patterns_free
+    current_user.patterns.each do |pattern|
+      pattern.price = 0
+      pattern.save
+    end
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign

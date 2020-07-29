@@ -44,6 +44,17 @@ def populate_users
          )
         user.save!
      end
+     #create admin jason
+     user = User.new(
+        :name                  => "jason",
+        :username              => "jason",
+        :email                 => "jason@jason.com",
+        :password              => "123456",
+        :password_confirmation => "123456",
+        :admin                 => true
+     )
+        user.save!
+        puts "created admin jason"
 end
 
 def populate_sellers
