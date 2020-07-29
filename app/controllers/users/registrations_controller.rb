@@ -29,11 +29,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def destroy
     current_user.active = false
     current_user.save
-    # User::make_patterns_free
-    current_user.patterns.each do |pattern|
-      pattern.price = 0
-      pattern.save
-    end
+    resource.soft_delete
+    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    set_flash_message :notice, :destroyed
+    yield resource if block_given?
+    respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
   end
 
   # GET /resource/cancel

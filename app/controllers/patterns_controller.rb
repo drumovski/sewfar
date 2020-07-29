@@ -71,7 +71,7 @@ class PatternsController < ApplicationController
     end
 
     def authorise_change
-      if (@pattern.user_id != current_user.id) || !current_user.is_seller || current_user.admin
+      if (@pattern.user_id != current_user.id && !current_user.admin) || (!current_user.is_seller && !current_user.admin) 
         redirect_to patterns_path
       end
     end
