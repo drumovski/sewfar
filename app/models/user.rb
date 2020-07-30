@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :patterns
   has_one :seller
+  has_one_attached :picture
 
   # def self.make_patterns_free
   #   current_user.patterns.each do |pattern|

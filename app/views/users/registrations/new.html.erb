@@ -32,6 +32,12 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <div>
+  <%= f.label :picture %> 
+  <%= f.file_field :picture, accept: 'image/png,image/gif,image/jpeg,image/jpg' %>
+</div>
+
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
