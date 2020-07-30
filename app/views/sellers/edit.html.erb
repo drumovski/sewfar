@@ -1,7 +1,10 @@
 <h1>Editing Seller</h1>
 
 <%= render 'form', seller: @seller %>
+<h3>Cancel my seller account</h3>
 
-<%= link_to 'Delete your seller account', seller_path, method: :delete, data: { confirm: 'You will render all your patterns free, Are you sure?' } %> 
+<p>Note, this will render all your patterns prices free</p>
+
+<%= button_to 'Delete your seller account', seller_path, method: :delete, data: { confirm: 'You will render all your patterns free, Are you sure?' } %> 
 <%= link_to 'Show', @seller %> |
 <%= link_to 'Back', sellers_path %>

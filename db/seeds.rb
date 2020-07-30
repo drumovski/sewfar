@@ -9,12 +9,12 @@
 
 def populate_garments
     i=0
-    garment_names = ['apron', 'bikini', 'bodysuit', 'braces', 'cardigan', 'chaps', 'chuddah', 'coat', 'codpiece', 
-        'cummerbund' 'dress', 'dressing gown', 'dungarees', 'footwear', 'garter', 'gloves', 'gown', 'halter', 'hat', 'jacket',
-        'jerkin', 'jubbah', 'jumper', 'jump suit', 'kaftan', 'kimono', 'kilt', 'leotard', 'mask', 'mittens', 'negligee',
-        'nightgown', 'nightshirt', 'overalls', 'overcoat', 'overskirt', 'pullover', 'pyjamas', 'robe', 'sash', 'sari', 'sarong',
-        'shalwar', 'shawl', 'shirt', 'skivvy', 'smock', 'socks', 'sweater', 'swimming costume', 'tank top', 'thong', 'tie',
-        'tights', 'toga', 'T-shirt', 'undergarment', 'waistcoat', 'yashmak'
+    garment_names = ['apron', 'bag', 'belt', 'bikini', 'blouse', 'boots', 'bodysuit', 'bra', 'braces', 'cap', 'cardigan', 'chaps', 'chuddah', 'coat', 'codpiece', 
+        'corset', 'cummerbund', 'dress', 'dressing gown', 'dungarees', 'evening gown', 'footwear', 'g-string', 'garter', 'gloves', 'gown', 'halter', 'harness', 'hat', 'hoodie', 'jacket',
+        'jeans', 'jerkin', 'jubbah', 'jumper', 'jump suit', 'kaftan', 'kimono', 'kilt', 'knickers', 'leggings', 'leotard', 'mask', 'mittens', 'negligee',
+        'nightgown', 'nightshirt', 'overalls', 'overcoat', 'overskirt', 'pants', 'pullover', 'pyjamas', 'robe', 'ruff', 'sash', 'sari', 'sarong',
+        'shalwar', 'shawl', 'shirt', 'shorts', 'skirt', 'slacks', 'skivvy', 'smock', 'socks', 'suit', 'sweater', 'sweatpants', 'swimming costume', 'tank top', 'thong', 'tie',
+        'tights', 'toga', 'tracksuit', 'trench coat', 'T-shirt', 'tuxedo', 'undergarment', 'underwear', 'waistcoat', 'wedding dress', 'yashmak'
     ]
     garments = []
     garment_names.each do |g|
