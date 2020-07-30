@@ -12,6 +12,8 @@
     <p class="alert"><%= alert %></p>
     <% if user_signed_in? %>
       <p>Welcome <%= current_user.name %></p>
+      <%= image_tag "default-avatar.png"%>
+      <%= link_to "Home", patterns_path %>
       <% if current_user.admin %>
         <%= link_to "All accounts", sellers_path %>
       <% end %>

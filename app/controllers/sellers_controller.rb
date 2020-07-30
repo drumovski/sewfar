@@ -61,7 +61,6 @@ class SellersController < ApplicationController
   # DELETE /sellers/1
   # DELETE /sellers/1.json
   def destroy
-    # @user = User.find(@seller.id)
     @seller.user.is_seller = false
     @seller.user.save
     # User::make_patterns_free
@@ -97,7 +96,7 @@ class SellersController < ApplicationController
     end
 
     def authorise_change
-      if (@seller.user_id != current_user.id || current_user.admin)
+      if (@seller.user_id != current_user.id && !current_user.admin)
         redirect_to patterns_path
       end
     end

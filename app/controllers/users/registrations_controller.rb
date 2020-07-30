@@ -21,7 +21,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    puts 'in update'
     super
   end
 
@@ -34,7 +33,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     set_flash_message :notice, :destroyed
     yield resource if block_given?
     respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+    # respond_with_navigational(@user){ redirect_to after_sign_out_path_for(@user) }
   end
+
+
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
