@@ -95,7 +95,7 @@ def populate_patterns
         :description         => "A really cool pattern that you are going to love",
         :difficulty          => rand(3),
         :notions             => "2 buttons",
-        :garment_id          => Garment.first.id + rand(85)+1,
+        :garment_id          => Garment.first.id + rand(84)+1,
         :complete            => true,
         :user_id             => User.find_by(name: n).id
          )
@@ -105,27 +105,40 @@ def populate_patterns
 end
 
 def attach_pictures
-    user = User.first
-    user.picture.attach(
-    io: File.open('headshots/1.jpg'),
-    filename: '1.jpg',
-    content_type: 'image/jpg',
-    identify: false
-  )
-  puts "added headshot image to #{User.first.name}"
+    users = User.all
+    i = 1
+    users.each do |user|
+    string1 = "headshots/#{i}.jpg"
+    string2 = "#{i}.jpg"
+         user.picture.attach(
+             io: File.open(string1),
+             filename: string2,
+             content_type: 'image/jpg',
+             identify: false
+           )
+            puts "added headshot image to #{user.name}, i = #{i}"
+           i += 1
+           i = 1 if i > 15
+     end
+
+
+
 end
 
 def purge_pictures
-    user = User.first
-    user.picture.purge
+    users = User.all
+    users.each do |user|
+        puts "purging picture #{user.name}"
+        user.picture.purge
+    end
 end
 
 def delete_everything
     Pattern.delete_all
     Garment.delete_all
     #reset patterns id so the random generator works as intended
-    # ActiveRecord::Base.connection.reset_pk_sequence!('garments')
-    
+    #couldn't get this to
+    # ActiveRecord::Base.connection.reset_pk_sequence!('garments')  
     Seller.delete_all
     User.delete_all
 end
