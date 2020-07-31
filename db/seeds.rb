@@ -104,11 +104,40 @@ def populate_patterns
      end
 end
 
-Garment.delete_all
-User.delete_all
-Seller.delete_all
-Pattern.delete_all
+def attach_pictures
+    user = User.first
+    user.picture.attach(
+    io: File.open('headshots/1.jpg'),
+    filename: '1.jpg',
+    content_type: 'image/jpg',
+    identify: false
+  )
+  puts "added headshot image to #{User.first.name}"
+end
+
+def purge_pictures
+    user = User.first
+    user.picture.purge
+end
+
+def delete_everything
+    Garment.delete_all
+    Pattern.delete_all
+    #reset patterns id so the random generator and enum works as intended
+    ActiveRecord::Base.connection.reset_pk_sequence!('patterns')
+    Seller.delete_all
+    User.delete_all
+end
+
+
+purge_pictures
+delete_everything
+
 populate_garments
 populate_users
 populate_sellers
 populate_patterns
+attach_pictures
+
+  
+  
