@@ -31,6 +31,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
      pattern.price = 0
      pattern.save
    end
+    user.picture.purge
     @user.soft_delete
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
     set_flash_message :notice, :destroyed

@@ -6,6 +6,7 @@ class AdminController < ApplicationController
           pattern.price = 0
           pattern.save
         end
+        user.picture.purge
         user.soft_delete
         respond_to do |format|
           format.html { redirect_to sellers_path, notice: 'User was successfully destroyed.' }
