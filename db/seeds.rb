@@ -95,7 +95,7 @@ def populate_patterns
         :description         => "A really cool pattern that you are going to love",
         :difficulty          => rand(3),
         :notions             => "2 buttons",
-        :garment_id          => rand(57)+1,
+        :garment_id          => Garment.first.id + rand(85)+1,
         :complete            => true,
         :user_id             => User.find_by(name: n).id
          )
@@ -121,23 +121,24 @@ def purge_pictures
 end
 
 def delete_everything
-    Garment.delete_all
     Pattern.delete_all
-    #reset patterns id so the random generator and enum works as intended
-    # ActiveRecord::Base.connection.reset_pk_sequence!('patterns')
+    Garment.delete_all
+    #reset patterns id so the random generator works as intended
+    # ActiveRecord::Base.connection.reset_pk_sequence!('garments')
+    
     Seller.delete_all
     User.delete_all
 end
 
 
-# purge_pictures
+purge_pictures
 delete_everything
 
 populate_garments
 populate_users
 populate_sellers
 populate_patterns
-# attach_pictures
+attach_pictures
 
   
   
