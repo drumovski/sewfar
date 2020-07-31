@@ -6,14 +6,13 @@ class CreatePatterns < ActiveRecord::Migration[6.0]
       t.string :sizes
       t.string :fabric
       t.integer :fabric_amount
-      t.integer :type
       t.integer :category
       t.float :price
       t.text :description
       t.integer :difficulty
       t.text :notions
       t.boolean :complete
-
+      t.references :garment, foreign_key: true
       t.timestamps
     end
   end

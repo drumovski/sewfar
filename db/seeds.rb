@@ -124,20 +124,20 @@ def delete_everything
     Garment.delete_all
     Pattern.delete_all
     #reset patterns id so the random generator and enum works as intended
-    ActiveRecord::Base.connection.reset_pk_sequence!('patterns')
+    # ActiveRecord::Base.connection.reset_pk_sequence!('patterns')
     Seller.delete_all
     User.delete_all
 end
 
 
-purge_pictures
+# purge_pictures
 delete_everything
 
 populate_garments
 populate_users
 populate_sellers
 populate_patterns
-attach_pictures
+# attach_pictures
 
   
   

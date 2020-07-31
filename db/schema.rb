@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_31_022315) do
+ActiveRecord::Schema.define(version: 2020_07_31_073758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 2020_07_31_022315) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "garment_number"
   end
 
   create_table "patterns", force: :cascade do |t|
@@ -55,9 +54,10 @@ ActiveRecord::Schema.define(version: 2020_07_31_022315) do
     t.integer "difficulty"
     t.text "notions"
     t.boolean "complete"
+    t.bigint "garment_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "garment_id"
+    t.index ["garment_id"], name: "index_patterns_on_garment_id"
     t.index ["user_id"], name: "index_patterns_on_user_id"
   end
 
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 2020_07_31_022315) do
     t.string "name"
     t.string "username"
     t.boolean "is_seller"
-    t.boolean "admin", default: false
+    t.boolean "admin"
     t.boolean "active", default: true
     t.datetime "deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 2020_07_31_022315) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "patterns", "garments"
   add_foreign_key "patterns", "users"
   add_foreign_key "sellers", "users"
 end

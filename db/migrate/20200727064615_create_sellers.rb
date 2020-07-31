@@ -18,6 +18,6 @@ class CreateSellers < ActiveRecord::Migration[6.0]
       t.references :user, null:false, foreign_key: true
       t.timestamps
     end
-    add_foreign_key :sellers, :users
+    #add_foreign_key :sellers, :users
   end
 end
