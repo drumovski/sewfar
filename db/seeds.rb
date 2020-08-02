@@ -122,8 +122,22 @@ def attach_pictures_to_users
      end
 end
 
-def attach_pictures_and_files_to_patterns
-    
+def attach_pictures_to_patterns
+    patterns = Pattern.all
+    i = 1
+    patterns.each do |pattern|
+    string1 = "clothes/#{i}.jpg"
+    string2 = "#{i}.jpg"
+         pattern.pictures.attach(
+             io: File.open(string1),
+             filename: string2,
+             content_type: 'image/jpg',
+             identify: false
+         )
+            puts "added clothes image to #{pattern.name}, i = #{i}"
+           i += 1
+           i = 1 if i > 31
+     end
 end
 
 def purge_pictures_and_files
@@ -159,7 +173,7 @@ populate_users
 populate_sellers
 populate_patterns
 attach_pictures_to_users
-attach_pictures_and_files_to_patterns
+attach_pictures_to_patterns
 
   
   
