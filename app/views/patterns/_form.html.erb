@@ -62,6 +62,16 @@
     <%= form.text_area :notions %>
   </div>
 
+    <div class="field">
+    <%= form.label :pictures %> 
+    <%= form.file_field :pictures, multiple: true, accept: 'image/png,image/gif,image/jpeg,image/jpg' %>
+  </div>
+  
+    <div class="field">
+    <%= form.label :files %> 
+    <%= form.file_field :files, multiple: true, accept: 'file/pdf' %>
+  </div>
+
   <% if !pattern.complete %>
   <div class="field">
     <%= form.label :complete %>

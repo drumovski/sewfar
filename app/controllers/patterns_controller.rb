@@ -57,6 +57,8 @@ class PatternsController < ApplicationController
   # DELETE /patterns/1
   # DELETE /patterns/1.json
   def destroy
+    @pattern.pictures.purge
+    @pattern.files.purge
     @pattern.destroy
     respond_to do |format|
       format.html { redirect_to patterns_url, notice: 'Pattern was successfully destroyed.' }
@@ -90,6 +92,6 @@ class PatternsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pattern_params
-      params.require(:pattern).permit(:name, :sizes, :fabric, :fabric_amount, :garment_id, :category, :price, :description, :difficulty, :notions, :complete)
+      params.require(:pattern).permit(:name, :sizes, :fabric, :fabric_amount, :garment_id, :category, :price, :description, :difficulty, :notions, :complete, pictures: [], files: [])
     end
 end

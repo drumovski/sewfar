@@ -104,7 +104,7 @@ def populate_patterns
      end
 end
 
-def attach_pictures
+def attach_pictures_to_users
     users = User.all
     i = 1
     users.each do |user|
@@ -120,38 +120,46 @@ def attach_pictures
            i += 1
            i = 1 if i > 15
      end
-
-
-
 end
 
-def purge_pictures
+def attach_pictures_and_files_to_patterns
+    
+end
+
+def purge_pictures_and_files
     users = User.all
     users.each do |user|
-        puts "purging picture #{user.name}"
+        puts "purging user picture for #{user.name}"
         user.picture.purge
     end
+    patterns = Pattern.all
+    patterns.each do |pattern|
+        puts "purging pattern images and files for #{pattern.name}"
+        pattern.pictures.purge
+        pattern.files.purge
+    end
+
 end
 
 def delete_everything
     Pattern.delete_all
     Garment.delete_all
     #reset patterns id so the random generator works as intended
-    #couldn't get this to
+    #couldn't get this to work damit
     # ActiveRecord::Base.connection.reset_pk_sequence!('garments')  
     Seller.delete_all
     User.delete_all
 end
 
 
-purge_pictures
+purge_pictures_and_files
 delete_everything
-
 populate_garments
 populate_users
 populate_sellers
 populate_patterns
-attach_pictures
+attach_pictures_to_users
+attach_pictures_and_files_to_patterns
 
   
   

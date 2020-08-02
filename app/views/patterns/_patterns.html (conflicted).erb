@@ -22,9 +22,7 @@
       <% if pattern.complete or (user_signed_in? && current_user.id == pattern.user_id) %>
       <tr>
         <td><%= User.find(pattern.user_id).username %></td>
-        <% if pattern.pictures.attached? %>
-        <td><%= image_tag pattern.pictures[0].variant(resize_to_limit: [100, 100]) %></td>
-        <% end %>
+        <td><%= pattern.pictures %></td>
         <td><%= pattern.name %></td>
         <td><%= pattern.sizes %></td>
         <td><%= pattern.fabric %></td>
@@ -49,3 +47,4 @@
   </tbody>
 </table>
 
+<br>
