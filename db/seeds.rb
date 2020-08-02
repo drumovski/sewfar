@@ -136,7 +136,7 @@ def attach_pictures_to_patterns
          )
             puts "added clothes image to #{pattern.name}, i = #{i}"
            i += 1
-           i = 1 if i > 31
+           i = 1 if i > 30
      end
 end
 
