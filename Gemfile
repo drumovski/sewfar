@@ -59,3 +59,5 @@ gem "aws-sdk-s3", "~> 1.75"
 
 gem 'image_processing'
 
+
+gem "stripe", "~> 5.22"
