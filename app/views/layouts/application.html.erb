@@ -13,7 +13,7 @@
     <% if user_signed_in? %>
       <p>Welcome <%= current_user.name %></p>
       <% if current_user.picture.attached? %>
-        <%= image_tag current_user.picture %>
+        <%= image_tag current_user.picture.variant(resize_to_limit: [60, 60]) %>
       <% else %>
        <%= image_tag "default-avatar.png"%>
        <% end %>

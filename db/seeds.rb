@@ -115,7 +115,7 @@ def attach_pictures
              filename: string2,
              content_type: 'image/jpg',
              identify: false
-           )
+         )
             puts "added headshot image to #{user.name}, i = #{i}"
            i += 1
            i = 1 if i > 15
