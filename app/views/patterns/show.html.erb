@@ -62,6 +62,23 @@
   <%= @pattern.notions %>
 </p>
 
+<button>Buy this pattern <%= number_to_currency(@pattern.price) %></button>
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+  document
+    .querySelector("[data-stripe='payment']")
+    .addEventListener("click", () => {
+      const stripe = Stripe(
+        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+      );
+
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
+      });
+    });
+</script>
 
 <% if user_signed_in? && current_user.id == @pattern.user_id && current_user.is_seller %>
   <%= link_to 'Edit', edit_pattern_path(@pattern) %> |
