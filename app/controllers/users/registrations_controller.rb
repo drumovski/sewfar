@@ -27,11 +27,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # DELETE /resource
   def destroy
    # User::make_patterns_free
-   @seller.user.patterns.each do |pattern|
+   @user.patterns.each do |pattern|
      pattern.price = 0
      pattern.save
    end
-    user.picture.purge
+    @user.picture.purge
     @user.soft_delete
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
     set_flash_message :notice, :destroyed
