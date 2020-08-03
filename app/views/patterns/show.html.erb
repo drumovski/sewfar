@@ -61,18 +61,20 @@
   <strong>Notions:</strong>
   <%= @pattern.notions %>
 </p>
+
 <%# if pattern has a price, use stripe. otherwise just download the pattern %>
  <% if @pattern.price != 0 %>
-<button>Buy this pattern <%= number_to_currency(@pattern.price) %></button>
+<button data-stripe="payment">
+  Pay Deposit <%= number_to_currency(@pattern.price) %>
+</button>
 
 <script src="https://js.stripe.com/v3/"></script>
-
 <script>
   document
     .querySelector("[data-stripe='payment']")
     .addEventListener("click", () => {
       const stripe = Stripe(
-        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+        "<%= ENV['STRIPE_PUBLIC_KEY'] %>"
       );
 
       stripe.redirectToCheckout({
@@ -80,6 +82,7 @@
       });
     });
 </script>
+
 <% else %>
   <%= link_to "Download this pattern", @pattern.files.first %>
 <% end %>

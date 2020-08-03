@@ -15,29 +15,29 @@ class PatternsController < ApplicationController
   # GET /patterns/1
   # GET /patterns/1.json
   def show
-    if @pattern.price != 0.0
+    # if @pattern.price != 0.0
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
-        customer_email: @pattern.user.email,
+        customer_email: current_user.email,
         line_items: [{
           name: @pattern.name,
-          # description: @pattern.description,
+          description: @pattern.description,
           amount: (@pattern.price * 100).to_i,
           currency: 'aud',
           quantity: 1
         }],
         payment_intent_data: {
           metadata: {
-            user_id: @pattern.user.id,
+            user_id: current_user.id,
             pattern_id: @pattern.id
           }
         },
-        success_url: "#{root_url}payments/success?userId=#{@pattern.user.id}&patternId=#{@pattern.id}",
+        success_url: "#{root_url}payments/success?userId=#{current_user.id}&patternId=#{@pattern.id}",
         cancel_url: "#{root_url}patterns"
       )
 
       @session_id = session.id
-    end
+    # end
   end
 
   # GET /patterns/new
