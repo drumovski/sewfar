@@ -29,10 +29,11 @@ class PatternsController < ApplicationController
         payment_intent_data: {
           metadata: {
             user_id: current_user.id,
-            pattern_id: @pattern.id
+            pattern_id: @pattern.id,
+            price: @pattern.price
           }
         },
-        success_url: "#{root_url}payments/success?userId=#{current_user.id}&patternId=#{@pattern.id}",
+        success_url: "#{root_url}transactions/success?userId=#{current_user.id}&patternId=#{@pattern.id}&price=#{@pattern.price}",
         cancel_url: "#{root_url}patterns"
       )
 
