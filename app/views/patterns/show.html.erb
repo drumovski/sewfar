@@ -61,7 +61,8 @@
   <strong>Notions:</strong>
   <%= @pattern.notions %>
 </p>
-
+<%# if pattern has a price, use stripe. otherwise just download the pattern %>
+ <% if @pattern.price != 0 %>
 <button>Buy this pattern <%= number_to_currency(@pattern.price) %></button>
 
 <script src="https://js.stripe.com/v3/"></script>
@@ -79,6 +80,9 @@
       });
     });
 </script>
+<% else %>
+  <%= link_to "Download this pattern", @pattern.files.first %>
+<% end %>
 
 <% if user_signed_in? && current_user.id == @pattern.user_id && current_user.is_seller %>
   <%= link_to 'Edit', edit_pattern_path(@pattern) %> |
