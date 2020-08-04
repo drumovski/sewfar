@@ -50,7 +50,7 @@
   <%= @pattern.notions %>
 </p>
 <% if user_signed_in? && current_user.transactions.where(pattern_id: @pattern.id).size > 0 %>
-  <%= link_to "Download this pattern", @pattern.files.first %>
+  <%= link_to "Download this pattern", @pattern.file%>
 <% else %>
   <%# if pattern has a price, use stripe. otherwise just download the pattern %>
   <% if @pattern.price != 0 && user_signed_in? %>
@@ -71,7 +71,7 @@
         });
     </script>
   <% elsif user_signed_in?  %>
-    <%= link_to "Download this pattern", @pattern.files.first %>
+    <%= link_to "Download this pattern", @pattern.file %>
   <% else %>
     <p> <%= link_to "Log in", new_user_session_path %>
       or <%= link_to "Sign up", new_user_registration_path %>

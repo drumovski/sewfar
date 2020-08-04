@@ -4,7 +4,7 @@ class Pattern < ApplicationRecord
   enum category: {women: 0, men: 1, unisex: 2, kids: 3, toys: 4}
   belongs_to :garment
   has_many_attached :pictures
-  has_many_attached :files
+  has_one_attached :file
   has_many :transactions
 
 end

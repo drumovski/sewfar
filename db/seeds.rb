@@ -140,6 +140,21 @@ def attach_pictures_to_patterns
      end
 end
 
+def attach_files_to_patterns
+    patterns = Pattern.all
+    i = 1
+    patterns.each do |pattern|
+         pattern.file.attach(
+             io: File.open('patterns/pattern.pdf'),
+             filename: 'pattern.pdf',
+             content_type: 'file/pdf',
+             identify: false
+         )
+            puts "added pattern pdf to #{pattern.name}, i = #{i}"
+           i += 1
+    end
+end
+
 def purge_pictures_and_files
     users = User.all
     users.each do |user|
@@ -150,11 +165,14 @@ def purge_pictures_and_files
     patterns.each do |pattern|
         puts "purging pattern images and files for #{pattern.name}"
         pattern.pictures.purge
-        pattern.files.purge
+        pattern.file.purge
     end
 
 end
-
+ def delete_transactions
+    Transaction.delete_all
+ end
+ 
 def delete_everything
     Pattern.delete_all
     Garment.delete_all
@@ -165,7 +183,7 @@ def delete_everything
     User.delete_all
 end
 
-
+delete_transactions
 purge_pictures_and_files
 delete_everything
 populate_garments
@@ -174,6 +192,6 @@ populate_sellers
 populate_patterns
 attach_pictures_to_users
 attach_pictures_to_patterns
-
+attach_files_to_patterns
   
   
