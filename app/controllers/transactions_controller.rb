@@ -18,9 +18,7 @@ class TransactionsController < ApplicationController
         head :ok
 
         transaction = Transaction.create(user_id: user_id, pattern_id: pattern_id, price: price, successful: true)
-        transaction.save
-        puts "----------------------------------------------------------------------"
-        puts transaction      
+        transaction.save   
     end
     
     private
