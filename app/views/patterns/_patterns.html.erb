@@ -31,7 +31,7 @@
         <td><%= pattern.fabric_amount %></td>
         <td><%= Garment.find(pattern.garment_id).name %></td>
         <td><%= pattern.category %></td>
-        <td><%= pattern.price %></td>
+        <td><%= number_to_currency(pattern.price) %></td>
         <td><%= pattern.description %></td>
         <td><%= pattern.difficulty %></td>
         <td><%= pattern.notions %></td>

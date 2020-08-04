@@ -8,31 +8,30 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <% if user_signed_in? %>
       <p>Welcome <%= current_user.name %></p>
       <% if current_user.picture.attached? %>
         <%= image_tag current_user.picture.variant(resize_to_limit: [60, 60]) %>
       <% else %>
-       <%= image_tag "default-avatar.png"%>
-       <% end %>
+        <%= image_tag "default-avatar.png"%>
+      <% end %>
       <%= link_to "Home", patterns_path %>
       <% if current_user.admin %>
         <%= link_to "All accounts", sellers_path %>
       <% end %>
-      <p>User is seller? <%= current_user.is_seller %></p>
       <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
       <%= link_to "Edit account", edit_user_registration_path %>
       <% if current_user.is_seller %>
         <%= link_to "Edit seller details", edit_seller_path(current_user.seller) %>
-        <% else %>
+      <% else %>
         <%= link_to "Become a seller", new_seller_path %>
-        <% end %>
+      <% end %>
     <% else %>
       <%= link_to "Log in", new_user_session_path %>
       <%= link_to "Sign up", new_user_registration_path %>
     <% end %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>
