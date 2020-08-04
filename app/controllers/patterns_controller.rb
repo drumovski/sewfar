@@ -15,7 +15,7 @@ class PatternsController < ApplicationController
   # GET /patterns/1
   # GET /patterns/1.json
   def show
-    # if @pattern.price != 0.0
+    if @pattern.price != 0.0 && user_signed_in? 
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         customer_email: current_user.email,
@@ -38,7 +38,7 @@ class PatternsController < ApplicationController
       )
 
       @session_id = session.id
-    # end
+    end
   end
 
   # GET /patterns/new

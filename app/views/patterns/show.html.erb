@@ -63,7 +63,7 @@
 </p>
 
 <%# if pattern has a price, use stripe. otherwise just download the pattern %>
- <% if @pattern.price != 0 %>
+ <% if @pattern.price != 0 && user_signed_in? %>
 <button data-stripe="payment">
   Buy Pattern <%= number_to_currency(@pattern.price) %>
 </button>
@@ -83,8 +83,12 @@
     });
 </script>
 
-<% else %>
+<% elsif user_signed_in?  %>
   <%= link_to "Download this pattern", @pattern.files.first %>
+  <% else %>
+  <p> <%= link_to "Log in", new_user_session_path %> 
+  or <%= link_to "Sign up", new_user_registration_path %> 
+  to download this pattern </p>
 <% end %>
 
 <% if user_signed_in? && current_user.id == @pattern.user_id && current_user.is_seller %>
