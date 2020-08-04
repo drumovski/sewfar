@@ -17,6 +17,16 @@ class TransactionsController < ApplicationController
         p "price " + price
     
         head :ok
+
+        transaction = Transaction.new
+        transaction.user_id = user_id
+        transaction.pattern_id = pattern_id
+        transaction.price = price
+        transaction.successful = true
+        transaction.save
     end
     
 end
+
+
+

@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :patterns
   has_one :seller
   has_one_attached :picture
+  has_many :transactions
 
   # def self.make_patterns_free
   #   current_user.patterns.each do |pattern|

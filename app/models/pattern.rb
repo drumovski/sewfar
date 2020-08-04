@@ -5,6 +5,6 @@ class Pattern < ApplicationRecord
   belongs_to :garment
   has_many_attached :pictures
   has_many_attached :files
-
+  has_many :transactions
 
 end

@@ -11,6 +11,14 @@
     <% user_patterns = current_user.patterns.all %>
     <%= render partial: "patterns", object: user_patterns, as: 'patterns' %>
   <% end %>
+
+
+  <%# show patterns if the current user has patterns they have bought %>
+  <%  if current_user.transactions.any? %>
+    <h2>Bought Patterns</h2>
+    <% bought_patterns = current_user.transactions.all %>
+    <%= render partial: "patterns", object: user_patterns, as: 'patterns' %>
+  <% end %>
 <% end %>
 
 <%# show all patterns %>
