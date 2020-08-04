@@ -10,6 +10,13 @@ class PatternsController < ApplicationController
   # GET /patterns.json
   def index
     @patterns = Pattern.all
+    if user_signed_in?
+      @bought_patterns = []
+      current_user.transactions.each do |transaction|
+        @bought_patterns << transaction.pattern
+      end
+      @bought_patterns
+    end
   end
 
   # GET /patterns/1
@@ -33,7 +40,7 @@ class PatternsController < ApplicationController
             price: @pattern.price
           }
         },
-        success_url: "#{root_url}transactions/success?userId=#{current_user.id}&patternId=#{@pattern.id}&price=#{@pattern.price}",
+        success_url: "#{root_url}transactions/success?user_id=#{current_user.id}&pattern_id=#{@pattern.id}&price=#{@pattern.price}",
         cancel_url: "#{root_url}patterns"
       )
 

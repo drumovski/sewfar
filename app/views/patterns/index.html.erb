@@ -6,20 +6,18 @@
   <%= link_to 'New Pattern', new_pattern_path %>
   
   <%# show patterns if the current seller has patterns they have created %>
-  <%  if current_user.patterns.any? %>
+  <% if current_user.patterns.any? %>
     <h2>Your Patterns</h2>
     <% user_patterns = current_user.patterns.all %>
     <%= render partial: "patterns", object: user_patterns, as: 'patterns' %>
   <% end %>
-
+<% end %>
 
   <%# show patterns if the current user has patterns they have bought %>
-  <%  if current_user.transactions.any? %>
-    <h2>Bought Patterns</h2>
-    <% bought_patterns = current_user.transactions.all %>
-    <%= render partial: "patterns", object: user_patterns, as: 'patterns' %>
+  <% if user_signed_in? && current_user.transactions.any? %>
+    <h2>Purchased Patterns</h2>
+    <%= render partial: "patterns", object: @bought_patterns, as: 'patterns' %>
   <% end %>
-<% end %>
 
 <%# show all patterns %>
 <h2>All Patterns</h2>

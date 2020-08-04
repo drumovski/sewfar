@@ -15,17 +15,26 @@ class TransactionsController < ApplicationController
         p "pattern id " + pattern_id
         p "user id " + user_id
         p "price " + price
-    
         head :ok
 
-        transaction = Transaction.new
-        transaction.user_id = user_id
-        transaction.pattern_id = pattern_id
-        transaction.price = price
-        transaction.successful = true
+        transaction = Transaction.create(user_id: user_id, pattern_id: pattern_id, price: price, successful: true)
         transaction.save
+        puts "----------------------------------------------------------------------"
+        puts transaction      
     end
     
+    private
+
+    # def transaction_save(pattern_id, user_id, price)
+
+    #     transaction = Transaction.create(user_id: user_id, pattern_id: pattern_id, price: price)
+    #     transaction.save
+    #  puts "----------------------------------------------------------------------"
+    #  puts transaction
+    # end
+
+
+
 end
 
 
