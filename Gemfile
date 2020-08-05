@@ -63,3 +63,7 @@ gem "stripe", "~> 5.22"
 
 gem 'bootstrap', '~> 4.5.0'
 gem 'jquery-rails'
+
+gem 'active_storage_validations'
+
+gem 'country_select', '~> 4.0'

@@ -99,7 +99,8 @@ def populate_patterns
         :complete            => true,
         :user_id             => User.find_by(name: n).id
          )
-        pattern.save!
+
+        pattern.save!(validate:false)
         i += 1
      end
 end
