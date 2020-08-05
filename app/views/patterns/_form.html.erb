@@ -52,12 +52,6 @@
   <div class="field">
     <%= form.label :pictures %>
     <%= form.file_field :pictures, multiple: true, accept: 'image/jpg, image/png, image/gif, image/jpeg' %>
-    <% if pattern.pictures.attached? %>
-    <p>Current pictures:</p>
-      <% pattern.pictures.each do |pic|%>
-        <%= image_tag pic.variant(resize_to_limit: [60, 60]) %>
-      <% end %>
-    <% end %>
   </div>
   <div class="field">
     <%= form.label :file %>

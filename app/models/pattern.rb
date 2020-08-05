@@ -14,12 +14,11 @@ class Pattern < ApplicationRecord
 
   # validations for active storage
   validates :pictures, attached: true,
-                       content_type: ['image/png', 'image/jpg', 'image/jpeg'],
-                       limit: { min: 1, max: 6 },
+                       content_type: {in: ['image/png', 'image/jpg', 'image/jpeg'], message: 'should be a jpg or png'},
+                       limit: { min: 1, max: 6, message: 'limit of 6 images' },
                        size: { less_than: 5.megabytes, message: 'must be less than 5MB in size' }
 
   validates :file, attached: true,
-                   content_type: { in: 'application/pdf', message: 'is not a PDF' },
-                   limit: { min: 1, max: 6 },
+                   content_type: { in: 'application/pdf', message: 'must be a PDF' },
                    size: { less_than: 5.megabytes, message: 'must be less than 5MB in size' }
 end

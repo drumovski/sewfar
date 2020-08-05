@@ -75,7 +75,7 @@
   <% else %>
     <p> <%= link_to "Log in", new_user_session_path %>
       or <%= link_to "Sign up", new_user_registration_path %>
-      to download this pattern </p>
+      to purchase this pattern </p>
   <% end %>
 <% end %>
 <% if user_signed_in? && current_user.id == @pattern.user_id && current_user.is_seller %>

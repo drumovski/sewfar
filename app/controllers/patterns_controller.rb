@@ -90,7 +90,7 @@ class PatternsController < ApplicationController
   # DELETE /patterns/1.json
   def destroy
     @pattern.pictures.purge
-    @pattern.files.purge
+    @pattern.file.purge
     @pattern.destroy
     respond_to do |format|
       format.html { redirect_to patterns_url, notice: 'Pattern was successfully destroyed.' }
