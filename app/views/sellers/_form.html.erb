@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :business_name %>
-    <%= form.text_field :business_name %>
+    <%= form.text_field :business_name, required: true %>
   </div>
 
   <div class="field">
@@ -53,7 +53,7 @@
 
   <div class="field">
     <%= form.label :address_line_1 %>
-    <%= form.text_area :address_line_1 %>
+    <%= form.text_area :address_line_1, required: true %>
   </div>
 
   <div class="field">
@@ -63,18 +63,18 @@
 
   <div class="field">
     <%= form.label :city %>
-    <%= form.text_field :city %>
+    <%= form.text_field :city, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :postcode %>
-    <%= form.text_field :postcode %>
+    <%= form.text_field :postcode, required: true %>
   </div>
 
-  <div class="field">
-    <%= form.label :country %>
-    <%= form.text_field :country %>
-  </div>
+<div class="field">
+  <%= form.label :country %>
+  <%= form.country_select :country %>
+ </div>
 
   <div class="actions">
     <%= form.submit %>
