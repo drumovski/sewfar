@@ -8,30 +8,53 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <% if user_signed_in? %>
-      <p>Welcome <%= current_user.name %></p>
-      <% if current_user.picture.attached? %>
-        <%= image_tag current_user.picture.variant(resize_to_limit: [60, 60]) %>
-      <% else %>
-        <%= image_tag "default-avatar.png"%>
-      <% end %>
-      <%= link_to "Home", patterns_path %>
-      <% if current_user.admin %>
-        <%= link_to "All accounts", sellers_path %>
-      <% end %>
-      <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
-      <%= link_to "Edit account", edit_user_registration_path %>
-      <% if current_user.is_seller %>
-        <%= link_to "Edit seller details", edit_seller_path(current_user.seller) %>
-      <% else %>
-        <%= link_to "Become a seller", new_seller_path %>
-      <% end %>
-    <% else %>
-      <%= link_to "Log in", new_user_session_path %>
-      <%= link_to "Sign up", new_user_registration_path %>
-    <% end %>
-     <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-  </body>
+  
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <% if user_signed_in? %>
+            <% if current_user.picture.attached? %>
+            <ul class="navbar-nav">
+              <li class="nav-item top-item">
+                <%= image_tag current_user.picture.variant(resize_to_limit: [60, 60]) %>
+              <% else %>
+                <%= image_tag "default-avatar.png"%>
+              </li>
+            <% end %>
+            <li class="nav-item top-item">
+              Welcome <%= current_user.name %>
+            </li>
+            </ul>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          
+            <% if current_user.admin %>
+              <li class="nav-item top-item"><%= link_to "All accounts", sellers_path %>
+              </li>
+            <% end %>
+            <li class="nav-item top-item"><%= link_to "Edit account", edit_user_registration_path %></li>
+            <% if current_user.is_seller %>
+              <li class="nav-item top-item"><%= link_to "Edit seller details", edit_seller_path(current_user.seller) %></li>
+            <% else %>
+              <li class="nav-item top-item"><%= link_to "Become a seller", new_seller_path %></li>
+            <% end %>
+          </ul>
+          <ul class="navbar-nav navbar-right">
+            <li class="nav-item top-item"><%= link_to "Log out", destroy_user_session_path, :method => :delete %></li>
+          <% else %>
+            <li class="nav-item top-item"><%= link_to "Log in", new_user_session_path %></li>
+            <li class="nav-item top-item"><%= link_to "Sign up", new_user_registration_path %></li>
+          <% end %>
+        
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <%= yield %>
+</body>
 </html>
+<%# <ul class="nav navbar-nav navbar-right"> %>
+<%# </ul> %>

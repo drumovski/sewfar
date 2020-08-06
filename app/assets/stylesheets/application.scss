@@ -12,3 +12,14 @@
 */
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+@import "partials/*";
+.navbar {
+    background-color: $aqua;
+
+}
+.navbar-toggler {
+    background-color: $blue;
+}
+.top-item {
+    padding-left: 10px;
+}
