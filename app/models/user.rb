@@ -17,6 +17,9 @@ class User < ApplicationRecord
   #   current_user.save
   # end
 
+
+    #soft delete used due to wanting to keep any patterns from being orphaned.
+    
     # instead of deleting, indicate the user requested a delete & timestamp it  
     def soft_delete  
       update_attribute(:deleted_at, Time.current)  

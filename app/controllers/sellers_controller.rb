@@ -1,7 +1,9 @@
 class SellersController < ApplicationController
   before_action :set_seller, only: [:show, :edit, :update, :destroy]
+  #admin use only
   before_action :authorise_index, only: [:index]
-  before_action :authorise_change, only: [:show, :edit, :update, :destroy]
+  #admin and the seller themselves only
+  before_action :authorise_change, only: [:edit, :update, :destroy]
 
   # GET /sellers
   # GET /sellers.json
@@ -63,7 +65,7 @@ class SellersController < ApplicationController
   def destroy
     @seller.user.is_seller = false
     @seller.user.save
-    # User::make_patterns_free
+    #make all patterns the user owns free due to patterns needing to remain active if people have purchesed them
     @seller.user.patterns.each do |pattern|
       pattern.price = 0
       pattern.save
@@ -87,6 +89,7 @@ class SellersController < ApplicationController
       params.require(:seller).permit(:business_name, :abn, :website, :facebook, :twitter, :linkedin, :instagram, :about, :address_line_1, :address_line_2, :city, :postcode, :country)
     end
 
+    #authorise admin use only
     def authorise_index
       if user_signed_in? 
         if !current_user.admin
@@ -95,6 +98,7 @@ class SellersController < ApplicationController
      end
     end
 
+    #authorise admin and the seller themselves
     def authorise_change
       if (@seller.user_id != current_user.id && !current_user.admin)
         redirect_to patterns_path

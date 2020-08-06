@@ -26,12 +26,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource
   def destroy
-   # User::make_patterns_free
+   #make all patterns the user owns free
    @user.patterns.each do |pattern|
      pattern.price = 0
      pattern.save
    end
     @user.picture.purge
+    if @user.seller
+      @user.seller.destroy
+    end
+    #used soft delete method due to patterns needing to remain active if people have purchesed them
     @user.soft_delete
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
     set_flash_message :notice, :destroyed

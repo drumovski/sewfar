@@ -22,6 +22,3 @@
 <%# show all patterns %>
 <h2>All Patterns</h2>
 <%= render partial: "patterns", object: @patterns, as: 'patterns' %>
-
-<%= @patterns.find(40).transactions.any? %>
-<%= @patterns.find(30).transactions.any? %>

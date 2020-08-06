@@ -73,7 +73,7 @@ def populate_sellers
         :country               => "Australia",
         :user_id               => User.find_by(name: n).id
          )
-        seller.save!
+        seller.save!(validate:false)
         u = User.find_by(name: n)
         u.is_seller = true
         u.save!

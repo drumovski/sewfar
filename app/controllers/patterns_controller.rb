@@ -2,9 +2,10 @@
 
 class PatternsController < ApplicationController
   before_action :set_pattern, only: %i[show edit update destroy]
+  #for admin and pattern owners
   before_action :authorise_change, only: %i[edit update destroy]
+  #for sellers
   before_action :authorise_new, only: %i[new create]
-  before_action :authorise_destroy, only: [:destroy]
 
   # GET /patterns
   # GET /patterns.json
@@ -59,7 +60,6 @@ class PatternsController < ApplicationController
   # POST /patterns
   # POST /patterns.json
   def create
-    # @pattern = Pattern.new(pattern_params)
     @pattern = current_user.patterns.create(pattern_params)
     respond_to do |format|
       if @pattern.save
@@ -109,10 +109,6 @@ class PatternsController < ApplicationController
     if (@pattern.user_id != current_user.id && !current_user.admin) || (!current_user.is_seller && !current_user.admin)
       redirect_to patterns_path
     end
-  end
-
-  def authorise_destroy
-    redirect_to patterns_path if @pattern.complete && !current_user.admin
   end
 
   def authorise_new
