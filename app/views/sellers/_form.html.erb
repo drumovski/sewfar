@@ -1,3 +1,4 @@
+<div class = "basic-form-box">
 <%= form_with(model: seller, local: true) do |form| %>
   <% if seller.errors.any? %>
     <div id="error_explanation">
@@ -80,3 +81,4 @@
     <%= form.submit %>
   </div>
 <% end %>
+</div>

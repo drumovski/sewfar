@@ -17,6 +17,7 @@
 body {
     padding-top: 75px;
     font-family: 'EB Garamond', serif;
+    font-size: 1.1em;
 }
 
 .navbar {
@@ -36,9 +37,14 @@ body {
     font-size: 140px;
     font-family: 'Ruthie', cursive;
 }
-.pattern-index-menu {
+
+// pattern page styling
+.basic-index-menu {
     text-align: center;
     border-bottom: solid $blue 2px;
+}
+.basic-index-link {
+    padding: 10px;
 }
 
 .patterns-group-text {
@@ -76,8 +82,20 @@ body {
     }
 }
 
-// edit user
+  // edit user not working!!!
 .edit-user-container {
     width: 80%;
     background-color: $pink;
+    color: red;
 }
+  .new {
+      color:red;
+  }
+
+.basic-form-box {
+      background-color: $pink;
+      width: 80%;
+      margin: auto;
+      text-align: center;
+}
+
