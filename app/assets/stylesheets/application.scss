@@ -13,37 +13,71 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 @import "partials/*";
+
 body {
     padding-top: 75px;
+    font-family: 'EB Garamond', serif;
 }
+
 .navbar {
     background-color: $aqua;
 
 }
+
 .navbar-toggler {
     background-color: $blue;
 }
+
 .top-item {
     padding-left: 10px;
 }
+
 .sew-far-logo {
     font-size: 140px;
     font-family: 'Ruthie', cursive;
 }
+.pattern-index-menu {
+    text-align: center;
+    border-bottom: solid $blue 2px;
+}
+
+.patterns-group-text {
+    padding: 10px;
+}
+
 .patterns-container {
     margin: auto;
-    display: flex;  
-    flex-wrap: wrap; 
+    display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     width: 80%;
 }
+
 .pattern-box {
     background-color: $pink;
-    border: 1px solid red;
     flex-wrap: wrap;
     width: 350px;
-    height: 350px;
+    height: 500px;
     padding: 10px;
     margin: 10px;
+    border-radius: 10px;
 
+    .pattern-thumb {
+        // float: left;
+        margin-right: 5px;
+    }
+
+    .pattern-details {
+        list-style: none;
+
+        .pattern-title {
+            font-size: 1.3em;
+        }
+    }
+}
+
+// edit user
+.edit-user-container {
+    width: 80%;
+    background-color: $pink;
 }

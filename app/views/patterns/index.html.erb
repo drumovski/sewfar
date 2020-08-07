@@ -1,12 +1,14 @@
-<h1>Patterns</h1>
 
+<div class = "pattern-index-menu">
 <%# show only  current user is a seller and signed in %>
-<% if user_signed_in? && current_user.is_seller %>
-  <%= link_to 'New Pattern', new_pattern_path %>
-  
+<a class = "pattern-index-link"><% if user_signed_in? && current_user.is_seller %>
+  <%= link_to 'New Pattern', new_pattern_path %></a>
+
+</div>
+
   <%# show patterns if the current seller has patterns they have created %>
   <% if current_user.patterns.any? %>
-    <h2>Your Patterns</h2>
+    <h2 class = "patterns-group-text">Your Patterns</h2>
     <% user_patterns = current_user.patterns.all %>
     <%= render partial: "patterns", object: user_patterns, as: 'patterns' %>
   <% end %>
@@ -14,10 +16,10 @@
 
   <%# show patterns if the current user has patterns they have bought %>
   <% if user_signed_in? && current_user.transactions.any? %>
-    <h2>Purchased Patterns</h2>
+    <h2 class = "patterns-group-text">Purchased Patterns</h2>
     <%= render partial: "patterns", object: @bought_patterns, as: 'patterns' %>
   <% end %>
 
 <%# show all patterns %>
-<h2>All Patterns</h2>
+<h2 class = "patterns-group-text">All Patterns</h2>
 <%= render partial: "patterns", object: @patterns, as: 'patterns' %>

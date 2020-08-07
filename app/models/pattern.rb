@@ -9,8 +9,8 @@ class Pattern < ApplicationRecord
   has_one_attached :file
   has_many :transactions
 
-  enum difficulty: { easy: 0, medium: 1, hard: 2 }
-  enum category: { women: 0, men: 1, unisex: 2, kids: 3, toys: 4 }
+  enum difficulty: { Easy: 0, Medium: 1, Hard: 2 }
+  enum category: { Women: 0, Men: 1, Unisex: 2, Kids: 3, Toys: 4 }
 
   validates :name, :sizes, :garment, :category, :price, :description, :difficulty, presence: true
 
