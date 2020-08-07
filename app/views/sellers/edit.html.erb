@@ -1,3 +1,4 @@
+<div class = basic-form-box>
 <h1>Editing Seller</h1>
 
 <%= render 'form', seller: @seller %>
@@ -7,4 +8,6 @@
 
 <%= button_to 'Delete your seller account', seller_path, method: :delete, data: { confirm: 'You will render all your patterns free, Are you sure?' } %> 
 <%= link_to 'Show', @seller %> |
-<%= link_to 'Back', sellers_path %>
+<%= link_to 'Back', sellers_path %> |
+<%= link_to 'Home', patterns_path %> 
+</div>

@@ -63,7 +63,7 @@ body {
     background-color: $pink;
     flex-wrap: wrap;
     width: 350px;
-    height: 500px;
+    height: 550px;
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
@@ -82,20 +82,12 @@ body {
     }
 }
 
-  // edit user not working!!!
-.edit-user-container {
-    width: 80%;
-    background-color: $pink;
-    color: red;
-}
-  .new {
-      color:red;
-  }
-
+// most views have this box
 .basic-form-box {
       background-color: $pink;
       width: 80%;
       margin: auto;
       text-align: center;
+      padding: 20px;
 }
 
