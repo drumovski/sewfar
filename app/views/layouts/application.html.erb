@@ -6,55 +6,63 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css2?family=Ruthie&display=swap" rel="stylesheet">
   </head>
   <body>
-  
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="#">Sew Far</a>
+      <% if user_signed_in? %>
+        <% if current_user.picture.attached? %>
+          <%= image_tag current_user.picture.variant(resize_to_limit: [60, 60]) %>
+        <% else %>
+          <img <%= image_tag "default-avatar.png"%>>
+        <% end %>
+        Welcome <%= current_user.name %>
+      <% end %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <% if user_signed_in? %>
-            <% if current_user.picture.attached? %>
-            <ul class="navbar-nav">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <% if user_signed_in? %>
+            <% if current_user.admin %>
               <li class="nav-item top-item">
-                <%= image_tag current_user.picture.variant(resize_to_limit: [60, 60]) %>
-              <% else %>
-                <%= image_tag "default-avatar.png"%>
+                <%= link_to "All accounts", sellers_path %>
               </li>
             <% end %>
             <li class="nav-item top-item">
-              Welcome <%= current_user.name %>
+              <%= link_to "Edit account", edit_user_registration_path %>
             </li>
-            </ul>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          
-            <% if current_user.admin %>
-              <li class="nav-item top-item"><%= link_to "All accounts", sellers_path %>
+            <% if current_user.is_seller %>
+              <li class="nav-item top-item">
+                <%= link_to "Edit seller details", edit_seller_path(current_user.seller) %>
+              </li>
+            <% else %>
+              <li class="nav-item top-item">
+                <%= link_to "Become a seller", new_seller_path %>
               </li>
             <% end %>
-            <li class="nav-item top-item"><%= link_to "Edit account", edit_user_registration_path %></li>
-            <% if current_user.is_seller %>
-              <li class="nav-item top-item"><%= link_to "Edit seller details", edit_seller_path(current_user.seller) %></li>
-            <% else %>
-              <li class="nav-item top-item"><%= link_to "Become a seller", new_seller_path %></li>
-            <% end %>
-          </ul>
-          <ul class="navbar-nav navbar-right">
-            <li class="nav-item top-item"><%= link_to "Log out", destroy_user_session_path, :method => :delete %></li>
+            <li class="nav-item top-item">
+              <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
+            </li>
           <% else %>
-            <li class="nav-item top-item"><%= link_to "Log in", new_user_session_path %></li>
-            <li class="nav-item top-item"><%= link_to "Sign up", new_user_registration_path %></li>
+            <li class="nav-item top-item">
+              <%= link_to "Log in", new_user_session_path %>
+            </li>
+            <li class="nav-item top-item">
+              <%= link_to "Sign up", new_user_registration_path %>
+            </li>
           <% end %>
-        
         </ul>
       </div>
-    </div>
-  </nav>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  <%= yield %>
-</body>
+    </nav>
+    <h1 class="text-center sew-far-logo">Sew Far</h1>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+  </body>
 </html>
-<%# <ul class="nav navbar-nav navbar-right"> %>
-<%# </ul> %>
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
