@@ -13,6 +13,9 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 @import "partials/*";
+body {
+    padding-top: 75px;
+}
 .navbar {
     background-color: $aqua;
 
@@ -26,4 +29,21 @@
 .sew-far-logo {
     font-size: 140px;
     font-family: 'Ruthie', cursive;
+}
+.patterns-container {
+    margin: auto;
+    display: flex;  
+    flex-wrap: wrap; 
+    flex-direction: row;
+    width: 80%;
+}
+.pattern-box {
+    background-color: $pink;
+    border: 1px solid red;
+    flex-wrap: wrap;
+    width: 350px;
+    height: 350px;
+    padding: 10px;
+    margin: 10px;
+
 }
