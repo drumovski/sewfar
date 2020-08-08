@@ -49,9 +49,6 @@ class PatternsController < ApplicationController
     end
   end
 
-  def view_picture
-  end
-
   # GET /patterns/new
   def new
     @pattern = Pattern.new
