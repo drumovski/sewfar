@@ -41,7 +41,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     set_flash_message :notice, :destroyed
     yield resource if block_given?
     respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
-    # respond_with_navigational(@user){ redirect_to after_sign_out_path_for(@user) }
   end
 
 

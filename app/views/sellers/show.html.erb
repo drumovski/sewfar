@@ -1,69 +1,50 @@
 <div class = "basic-form-box">
-<p>
-  <strong>Business name:</strong>
-  <%= @seller.business_name %>
-</p>
-
-<p>
-  <strong>Abn:</strong>
-  <%= @seller.abn %>
-</p>
-
-<p>
-  <strong>Website:</strong>
-  <%= @seller.website %>
-</p>
-
-<p>
-  <strong>Facebook:</strong>
-  <%= @seller.facebook %>
-</p>
-
-<p>
-  <strong>Twitter:</strong>
-  <%= @seller.twitter %>
-</p>
-
-<p>
-  <strong>Linkedin:</strong>
-  <%= @seller.linkedin %>
-</p>
-
-<p>
-  <strong>Instagram:</strong>
-  <%= @seller.instagram %>
-</p>
-
-<p>
-  <strong>About:</strong>
-  <%= @seller.about %>
-</p>
-
-<p>
-  <strong>Address line 1:</strong>
-  <%= @seller.address_line_1 %>
-</p>
-
-<p>
-  <strong>Address line 2:</strong>
-  <%= @seller.address_line_2 %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @seller.city %>
-</p>
-
-<p>
-  <strong>Postcode:</strong>
-  <%= @seller.postcode %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @seller.country %>
-</p>
-
-<%= link_to 'Edit', edit_seller_path(@seller) %> |
-<%= link_to 'Back', sellers_path %>
+  <p>
+    <strong>Name:</strong>
+    <%= @seller.business_name %>
+  </p>
+  <%if @seller.website %>
+    <p>
+      <strong>Website:</strong>
+      <%= @seller.website %>
+    </p>
+  <% end %>
+  <%if @seller.facebook %>
+    <p>
+      <strong>Facebook:</strong>
+      <%= @seller.facebook %>
+    </p>
+  <% end %>
+  <%if @seller.twitter %>
+    <p>
+      <strong>Twitter:</strong>
+      <%= @seller.twitter %>
+    </p>
+  <% end %>
+  <%if @seller.linkedin %>
+    <p>
+      <strong>Linkedin:</strong>
+      <%= @seller.linkedin %>
+    </p>
+  <% end%>
+  <%if @seller.instagram %>
+    <p>
+      <strong>Instagram:</strong>
+      <%= @seller.instagram %>
+    </p>
+  <% end %>
+  <% if @seller.about%>
+    <p>
+      <strong>About:</strong>
+      <%= @seller.about %>
+    </p>
+  <% end %>
+  <p>
+    <strong>Country:</strong>
+    <%= @seller.country %>
+  </p>
+  <% if user_signed_in? && current_user.id == @seller.user_id && current_user.is_seller %>
+  <%= link_to 'Edit', edit_seller_path(@seller) %> |
+  <% end %>
+  <%= link_to 'Back', sellers_path %>
 </div>

@@ -11,7 +11,9 @@
             <%= image_tag pattern.pictures[0].variant(resize_to_limit: [200, 200]) %>
             </li>
           <% end %>
-          <li>By: <%= User.find(pattern.user_id).username %></li>
+          <% if User.find(pattern.user_id).seller%>
+            <li>By: <%= User.find(pattern.user_id).seller.business_name %></li>
+            <% end %>
           <li>For sizes: <%= pattern.sizes %></li>
           <li>Type: <%= Garment.find(pattern.garment_id).name %></li>
           <li>For: <%= pattern.category %></li>

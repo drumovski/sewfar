@@ -1,85 +1,91 @@
 <div class = "basic-form-box">
-<p>
-  <strong>Username:</strong>
-  <%= User.find(@pattern.user_id).username %>
-</p>
-<p>
-  <strong>Name:</strong>
-  <%= @pattern.name %>
-</p>
-<p>
-  <% @pattern.pictures.each do |pic|%>
-    <%= image_tag pic.variant(resize_to_limit: [300, 300]) %>
+  <% if @seller %>
+  <p>
+    <strong>Created by:</strong>
+    <%= link_to "#{@seller.business_name}", seller_path(@seller) %>
+  </p>
   <% end %>
-</p>
-<p>
-  <strong>Sizes:</strong>
-  <%= @pattern.sizes %>
-</p>
-<p>
-  <strong>Fabric:</strong>
-  <%= @pattern.fabric %>
-</p>
-<p>
-  <strong>Fabric amount:</strong>
-  <%= @pattern.fabric_amount %>
-</p>
-<p>
-  <strong>Garment:</strong>
-  <%= Garment.find(@pattern.garment_id).name %>
-</p>
-<p>
-  <strong>Category:</strong>
-  <%= @pattern.category %>
-</p>
-<p>
-  <strong>Price:</strong>
-  <%= @pattern.price %>
-</p>
-<p>
-  <strong>Description:</strong>
-  <%= @pattern.description %>
-</p>
-<p>
-  <strong>Difficulty:</strong>
-  <%= @pattern.difficulty %>
-</p>
-<p>
-  <strong>Notions:</strong>
-  <%= @pattern.notions %>
-</p>
-<% if user_signed_in? && current_user.transactions.where(pattern_id: @pattern.id).size > 0 %>
-  <%= link_to "Download this pattern", @pattern.file%>
-<% else %>
-  <%# if pattern has a price, use stripe. otherwise just download the pattern %>
-  <% if @pattern.price != 0 && user_signed_in? %>
-    <button data-stripe="payment">
-      Buy Pattern <%= number_to_currency(@pattern.price) %>
+  <p>
+    <strong>Name:</strong>
+    <%= @pattern.name %>
+  </p>
+  <p>
+    <% @pattern.pictures.each do |pic|%>
+      <%= image_tag pic.variant(resize_to_limit: [300, 300]) %>
+    <% end %>
+  </p>
+  <p>
+    <strong>Sizes:</strong>
+    <%= @pattern.sizes %>
+  </p>
+  <p>
+    <strong>Fabric:</strong>
+    <%= @pattern.fabric %>
+  </p>
+  <p>
+    <strong>Fabric amount:</strong>
+    <%= @pattern.fabric_amount %>
+  </p>
+  <p>
+    <strong>Garment:</strong>
+    <%= Garment.find(@pattern.garment_id).name %>
+  </p>
+  <p>
+    <strong>Category:</strong>
+    <%= @pattern.category %>
+  </p>
+  <p>
+    <strong>Price:</strong>
+    <%= number_to_currency(@pattern.price) %>
+  </p>
+  <p>
+    <strong>Description:</strong>
+    <%= @pattern.description %>
+  </p>
+  <p>
+    <strong>Difficulty:</strong>
+    <%= @pattern.difficulty %>
+  </p>
+  <p>
+    <strong>Notions:</strong>
+    <%= @pattern.notions %>
+  </p>
+  <% if user_signed_in? && current_user.transactions.where(pattern_id: @pattern.id).size > 0 %>
+    <button >
+      <%= link_to "Download pattern", @pattern.file %>
     </button>
-    <script src="https://js.stripe.com/v3/"></script>
-    <script>
-      document
-        .querySelector("[data-stripe='payment']")
-        .addEventListener("click", () => {
-          const stripe = Stripe(
-            "<%= ENV['STRIPE_PUBLIC_KEY'] %>"
-          );
-          stripe.redirectToCheckout({
-            sessionId: "<%= @session_id %>"
-          });
-        });
-    </script>
-  <% elsif user_signed_in?  %>
-    <%= link_to "Download this pattern", @pattern.file %>
   <% else %>
-    <p> <%= link_to "Log in", new_user_session_path %>
-      or <%= link_to "Sign up", new_user_registration_path %>
-      to purchase this pattern </p>
+    <%# if pattern has a price, use stripe. otherwise just download the pattern %>
+    <% if @pattern.price != 0 && user_signed_in? %>
+      <button data-stripe="payment">
+        Buy Pattern <%= number_to_currency(@pattern.price) %>
+      </button>
+      <script src="https://js.stripe.com/v3/"></script>
+      <script>
+        document
+          .querySelector("[data-stripe='payment']")
+          .addEventListener("click", () => {
+            const stripe = Stripe(
+              "<%= ENV['STRIPE_PUBLIC_KEY'] %>"
+            );
+            stripe.redirectToCheckout({
+              sessionId: "<%= @session_id %>"
+            });
+          });
+      </script>
+    <% elsif user_signed_in?  %>
+      <button >
+        <%= link_to "Download pattern", @pattern.file %>
+      </button>
+    <% else %>
+      <p> <%= link_to "Log in", new_user_session_path %>
+        or <%= link_to "Sign up", new_user_registration_path %>
+        to purchase this pattern </p>
+    <% end %>
   <% end %>
-<% end %>
-<% if user_signed_in? && current_user.id == @pattern.user_id && current_user.is_seller %>
-  <%= link_to 'Edit', edit_pattern_path(@pattern) %> |
-  <%= link_to 'New', new_pattern_path %>
-<% end %>
-<%= link_to 'Home', patterns_path %>
+  <% if user_signed_in? && current_user.id == @pattern.user_id && current_user.is_seller %>
+    <%= link_to 'Edit', edit_pattern_path(@pattern) %> |
+    <%= link_to 'New', new_pattern_path %> |
+  <% end %>
+  <%= link_to 'Home', patterns_path %>
 </div>

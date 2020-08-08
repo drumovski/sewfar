@@ -7,7 +7,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css2?family=Ruthie&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&display=swap" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
@@ -15,7 +15,7 @@
         <% if current_user.picture.attached? %>
           <%= image_tag current_user.picture.variant(resize_to_limit: [60, 60]) %>
         <% else %>
-          <img <%= image_tag "default-avatar.png"%>>
+          <%= image_tag "default-avatar.png"%>
         <% end %>
         Welcome <%= current_user.name %>
       <% end %>
@@ -24,7 +24,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-        <li class="nav-item top-item"><%= link_to "Home", patterns_path %></li>
+          <li class="nav-item top-item"><%= link_to "Home", patterns_path %></li>
           <% if user_signed_in? %>
             <% if current_user.admin %>
               <li class="nav-item top-item">
@@ -60,6 +60,15 @@
     <h1 class="text-center sew-far-logo">Sew Far</h1>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <%# show only if current user is a seller and signed in %>
+    <div class = "basic-index-menu">
+      <% if user_signed_in? && current_user.is_seller %>
+        <a class = "basic-index-link">
+          <%= link_to 'New Pattern', new_pattern_path %></a>
+      <% end %>
+      <a class = "basic-index-link">
+        <%= link_to 'Patterns', patterns_path %></a>
+    </div>
     <%= yield %>
   </body>
 </html>

@@ -46,6 +46,7 @@ class PatternsController < ApplicationController
       )
 
       @session_id = session.id
+      @seller = User.find(@pattern.user_id).seller
     end
   end
 
