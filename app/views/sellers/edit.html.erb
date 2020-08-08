@@ -1,5 +1,6 @@
 <%# page for editing sellers %>
 <h1 class = "heading-text" >Editing Seller</h1>
+<div class = "basic-form-box">
 <%= render 'form', seller: @seller %>
 <h3>Cancel my seller account</h3>
 <p>Note, this will render all your patterns prices free</p>
@@ -7,3 +8,4 @@
 <%= link_to 'Show', @seller %> |
 <%= link_to 'Back', sellers_path %> |
 <%= link_to 'Home', patterns_path %>
+</div>

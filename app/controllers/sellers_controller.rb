@@ -91,16 +91,14 @@ class SellersController < ApplicationController
 
     #authorise admin use only
     def authorise_index
-      if user_signed_in? 
-        if !current_user.admin
-          redirect_to patterns_path
-        end
+      if !user_signed_in? || (user_signed_in? && !current_user.admin)
+        redirect_to patterns_path
      end
     end
 
     #authorise admin and the seller themselves
     def authorise_change
-      if (@seller.user_id != current_user.id && !current_user.admin)
+      if !user_signed_in? || (@seller.user_id != current_user.id && !current_user.admin)
         redirect_to patterns_path
       end
     end

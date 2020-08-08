@@ -47,5 +47,5 @@
   <% if user_signed_in? && current_user.id == @seller.user_id && current_user.is_seller %>
   <%= link_to 'Edit', edit_seller_path(@seller) %> |
   <% end %>
-  <%= link_to 'Back', sellers_path %>
+  <%= link_to 'Back', patterns_path %>
 </div>

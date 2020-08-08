@@ -1,9 +1,9 @@
 <h1 class = "heading-text" >Pattern</h1>
 <div class = "basic-form-box">
-  <% if @seller %>
+  <% if @pattern.user.seller %>
   <p>
     <strong>Created by:</strong>
-    <%= link_to "#{@seller.business_name}", seller_path(@seller) %>
+    <%= link_to "#{@pattern.user.seller.business_name}", seller_path(@pattern.user.seller) %>
   </p>
   <% end %>
   <p>

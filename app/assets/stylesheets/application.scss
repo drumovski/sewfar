@@ -50,8 +50,7 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 .basic-index-link {
-    padding: 10px;
-    
+    padding: 10px; 
 }
 
 .heading-text {
@@ -103,9 +102,46 @@ body {
 // most views have this box
 .basic-form-box {
       background-color: $pink;
-      width: 80%;
+      max-width: 80%;
       margin: auto;
       text-align: center;
       padding: 20px;
+      -webkit-box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
+      -moz-box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
+      box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
 }
 
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+    .basic-form-box {
+        max-width: 40%;
+  }
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .basic-form-box {
+        max-width: 50%;
+    }
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+    .basic-form-box {
+        max-width: 60%;
+    }
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+    .basic-form-box {
+        max-width: 70%;
+    }
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    .basic-form-box {
+        max-width: 80%;
+    }
+}

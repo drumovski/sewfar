@@ -59,23 +59,24 @@ def populate_users
 end
 
 def populate_sellers
-    people = ["Zeb", "Jake", "Carl", "John", "Harry", "Chantel"]
+    people = ["zeb", "jake", "carl", "john", "harry", "chantel"]
     people.each do |n|
         puts "created seller #{n}"
         seller = Seller.new(
-        :business_name         => "#{n}'s shop",
+        :business_name         => "#{n.titleize}'s sewing shop",
         :abn                   => "239482743",
-        :website               => "www.#{n}shop.com",
-        :twitter               => "@#{n}",
+        :website               => "www.#{n}sshop.com",
+        :twitter               => "@the_real#{n}",
+        :facebook              => "www.facebook.com/#{n}",
         :linkedin              => "#{n}@linkedin",
-        :instagram              => "#{n}instagram123",
+        :instagram             => "www.instagram.com/#{n}instagram123",
         :about                 => "I have a shop and I'm really cool at sewing",
         :address_line_1        => "12A fake st",
         :address_line_2        => "Yarraville",
         :country               => "AU",
         :city                  => "Melbourne",
         :postcode              => "3000",
-        :user_id               => User.find_by(name: n).id
+        :user_id               => User.find_by(name: n.titleize).id
          )
         seller.save!(validate:false)
         u = User.find_by(name: n)
