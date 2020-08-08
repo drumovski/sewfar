@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  before_save :capital_letter_name
   validates_uniqueness_of :username
   validates_confirmation_of :active
   devise :database_authenticatable, :registerable,
@@ -34,4 +35,8 @@ class User < ApplicationRecord
     def inactive_message   
       !deleted_at ? super : :deleted_account  
     end  
+
+    def capital_letter_name
+     self.name = self.name.titleize
+    end
 end

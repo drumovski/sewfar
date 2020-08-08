@@ -59,7 +59,7 @@ def populate_users
 end
 
 def populate_sellers
-    people = ["zeb", "jake", "carl", "john", "harry", "chantel"]
+    people = ["Zeb", "Jake", "Carl", "John", "Harry", "Chantel"]
     people.each do |n|
         puts "created seller #{n}"
         seller = Seller.new(
@@ -68,10 +68,13 @@ def populate_sellers
         :website               => "www.#{n}shop.com",
         :twitter               => "@#{n}",
         :linkedin              => "#{n}@linkedin",
+        :instagram              => "#{n}instagram123",
         :about                 => "I have a shop and I'm really cool at sewing",
         :address_line_1        => "12A fake st",
         :address_line_2        => "Yarraville",
-        :country               => "Australia",
+        :country               => "AU",
+        :city                  => "Melbourne",
+        :postcode              => "3000",
         :user_id               => User.find_by(name: n).id
          )
         seller.save!(validate:false)
@@ -82,7 +85,7 @@ def populate_sellers
 end
 
 def populate_patterns
-    people = ["zeb", "zeb", "zeb", "zeb", "jake", "jake", "jake", "carl", "carl", "john" ]
+    people = ["Zeb", "Zeb", "Zeb", "Zeb", "Jake", "Jake", "Jake", "Carl", "Carl", "John" ]
     i = 1
     people.each do |n|
       puts "pattern created by #{n}"

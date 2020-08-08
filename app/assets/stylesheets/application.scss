@@ -22,35 +22,42 @@ body {
 
 .navbar {
     background-color: $aqua;
+    font-family: 'Roboto', sans-serif;
+    .avatar {
+        margin-right: 5px;
+    }
 
+    .navbar-toggler {
+        background-color: $blue;
+    }
+    
+    .top-item {
+        padding-left: 20px;
+    }
 }
 
-.navbar-toggler {
-    background-color: $blue;
-}
 
-.top-item {
-    padding-left: 10px;
-}
 
 .sew-far-logo {
     font-size: 140px;
     font-family: 'Ruthie', cursive;
 }
 
-// pattern page styling
+
 .basic-index-menu {
     text-align: center;
     border-bottom: solid $blue 3px;
+    font-family: 'Roboto', sans-serif;
 }
 .basic-index-link {
     padding: 10px;
+    
 }
 
 .heading-text {
     padding: 10px;
 }
-
+// pattern page styling
 .patterns-container {
     margin: auto;
     display: flex;
@@ -85,6 +92,11 @@ body {
     .pattern-links {
         margin-top: auto;
         text-align: center;
+        font-family: 'Roboto', sans-serif;
+
+        .pattern-link {
+            margin: 5px;
+        }
     }
 }
 
