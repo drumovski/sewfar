@@ -1,12 +1,13 @@
+<h2 class = "heading-text">New Sign up</h2>
 <div class = "basic-form-box">
-<h2>New Sign up</h2>
+
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
 <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+    <%= f.text_field :name.capitalize, autofocus: true %>
   </div>
 
     <div class="field">

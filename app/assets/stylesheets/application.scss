@@ -41,13 +41,13 @@ body {
 // pattern page styling
 .basic-index-menu {
     text-align: center;
-    border-bottom: solid $blue 2px;
+    border-bottom: solid $blue 3px;
 }
 .basic-index-link {
     padding: 10px;
 }
 
-.patterns-group-text {
+.heading-text {
     padding: 10px;
 }
 
@@ -56,6 +56,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
     width: 80%;
 }
 
@@ -66,12 +67,13 @@ body {
     height: 550px;
     padding: 10px;
     margin: 10px;
+    
     border-radius: 10px;
-
-    .pattern-thumb {
-        // float: left;
-        margin-right: 5px;
-    }
+    display: flex;
+    flex-direction: column;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
+    box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
 
     .pattern-details {
         list-style: none;
@@ -79,6 +81,10 @@ body {
         .pattern-title {
             font-size: 1.3em;
         }
+    }
+    .pattern-links {
+        margin-top: auto;
+        text-align: center;
     }
 }
 

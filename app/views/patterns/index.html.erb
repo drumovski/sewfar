@@ -2,7 +2,7 @@
 
   <%# show patterns if the current seller has patterns they have created %>
   <% if user_signed_in? && current_user.patterns.any? %>
-    <h2 class = "patterns-group-text">Your Patterns</h2>
+    <h2 class = "heading-text">Your Patterns</h2>
     <% user_patterns = current_user.patterns.all %>
     <%= render partial: "patterns", object: user_patterns, as: 'patterns' %>
   <% end %>
@@ -10,10 +10,10 @@
 
 <%# show patterns if the current user has patterns they have bought %>
 <% if user_signed_in? && current_user.transactions.any? %>
-  <h2 class = "patterns-group-text">Purchased Patterns</h2>
+  <h2 class = "heading-text">Purchased Patterns</h2>
   <%= render partial: "patterns", object: @bought_patterns, as: 'patterns' %>
 <% end %>
 
 <%# show all patterns %>
-<h2 class = "patterns-group-text">All Patterns</h2>
+<h2 class = "heading-text">All Patterns</h2>
 <%= render partial: "patterns", object: @patterns, as: 'patterns' %>

@@ -33,7 +33,8 @@ end
 def populate_users
      people = ["zeb", "jake", "carl", "john", "harry", "phil", "mary", "sue", "jill", "jenny", "karen", "gwen", "chantel", "aria", "marshall"]
      people.each do |n|
-        e = "#{n}@#{n}.com"
+        n = n
+        e = "#{n.downcase}@#{n}.com"
         puts "created user #{n}"
         user = User.new(
         :name                  => n,
