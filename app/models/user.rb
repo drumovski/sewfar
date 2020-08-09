@@ -5,7 +5,7 @@ class User < ApplicationRecord
   validates_uniqueness_of :username
   validates_confirmation_of :active
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :rememberable, :validatable
   has_many :patterns
   has_one :seller
   has_one_attached :picture
