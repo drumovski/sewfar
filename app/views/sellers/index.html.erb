@@ -1,7 +1,5 @@
-<%#  page not used %>
-<div class = "basic-form-box">
+<div class = "sellers-index-container">
 <h1>Sellers</h1>
-
 <table>
   <thead>
     <tr>
@@ -13,9 +11,7 @@
       <th>Twitter</th>
       <th>Linkedin</th>
       <th>Instagram</th>
-      <th>About</th>
       <th>Address line 1</th>
-      <th>Address line 2</th>
       <th>City</th>
       <th>Postcode</th>
       <th>Country</th>
@@ -34,14 +30,12 @@
         <td><%= seller.twitter %></td>
         <td><%= seller.linkedin %></td>
         <td><%= seller.instagram %></td>
-        <td><%= seller.about %></td>
         <td><%= seller.address_line_1 %></td>
-        <td><%= seller.address_line_2 %></td>
         <td><%= seller.city %></td>
         <td><%= seller.postcode %></td>
         <td><%= seller.country %></td>
-        <td><%= link_to 'Show', seller %></td>
-        <td><%= link_to 'Edit', edit_seller_path(seller) %></td>
+        <td><%= link_to 'Show |', seller %></td>
+        <td><%= link_to 'Edit |', edit_seller_path(seller) %></td>
         <td><%= link_to 'Destroy', seller, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -84,6 +78,5 @@
     <% end %>
   </tbody>
 </table>
-
 </div>
 

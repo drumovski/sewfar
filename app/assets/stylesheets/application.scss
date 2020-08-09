@@ -18,6 +18,7 @@ body {
     padding-top: 75px;
     font-family: 'EB Garamond', serif;
     font-size: 1.1em;
+    background-color: $white;
 }
 
 .navbar {
@@ -111,10 +112,20 @@ body {
       box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
 }
 
+.sellers-index-container {
+    background-color: $pink;
+    max-width: 90%;
+    margin: auto;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
+      -moz-box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
+      box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
+}
+
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
     .basic-form-box {
         max-width: 40%;
+
   }
 }
 
