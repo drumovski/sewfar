@@ -57,30 +57,32 @@
   </div>
 
   <%#  active storage fields %>
-  
-        <% if pattern.pictures.attached? %>
-        <div>
-        <p>Current pictures:</p>
-        <% pattern.pictures.each do |picture|%>
-          <%= image_tag picture.variant(resize_to_limit: [60, 60]) %>
-          <% end %>
-          </div>
-          <br>
-          <div class="field">
+
+  <%# preview pictures %>
+  <% if pattern.pictures.attached? %>
+    <div>
+      <p>Current pictures:</p>
+      <% pattern.pictures.each do |picture|%>
+        <%= image_tag picture.variant(resize_to_limit: [60, 60]) %>
+      <% end %>
+    </div>
+  <% end %>
+  <br>
+  <div class="field">
     <%= form.label :pictures, 'Pictures (max 6)' %>
     <%= form.file_field :pictures, multiple: true, accept: 'image/jpg, image/png, image/gif, image/jpeg' %>
-
-    <% end %>
   </div>
+  
+
+  <%#  preview files %>
   <div class="field">
-      <% if pattern.file.attached? %>
+    <% if pattern.file.attached? %>
       <p>Current instruction file</p>
       <div><%= image_tag pattern.file.preview(resize_to_limit: [60, 60]) %></div>
     <% end %>
     <br>
     <%= form.label :file, 'File instructions (pdf)' %>
     <%= form.file_field :file, accept: 'application/pdf' %>
-
   </div>
   <% if !pattern.complete %>
     <div class="field">
@@ -88,6 +90,7 @@
       <%= form.check_box :complete %>
     </div>
   <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>
