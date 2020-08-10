@@ -62,6 +62,14 @@ class PatternsController < ApplicationController
   def create
     @pattern = current_user.patterns.create(pattern_params)
     respond_to do |format|
+      # p "@pattern.valid?#{@pattern.valid?}"
+        
+
+      # temp_var = @pattern.save
+      # p "------------------yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+      # p temp_var
+      # p "@pattern.errors #{@pattern.errors}"
+
       if @pattern.save
         format.html { redirect_to @pattern, notice: 'Pattern was successfully created.' }
         format.json { render :show, status: :created, location: @pattern }

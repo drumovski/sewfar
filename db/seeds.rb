@@ -79,7 +79,7 @@ def populate_sellers
         :user_id               => User.find_by(name: n.titleize).id
          )
         seller.save!(validate:false)
-        u = User.find_by(name: n)
+        u = User.find_by(name: n.titleize)
         u.is_seller = true
         u.save!
      end
