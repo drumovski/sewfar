@@ -56,11 +56,15 @@
       <%= @pattern.notions %>
     </p>
   <% end %>
-
+  <% if @pattern.file.attached? %>
+      <p>Instructions</p>
+      <div><%= image_tag @pattern.file.preview(resize_to_limit: [60, 60]) %></div>
+  <% end %>
+  <br>
   <%# if pattern is already purchased by the user %>
   <% if user_signed_in? && current_user.transactions.where(pattern_id: @pattern.id).size > 0 %>
     <button >
-      <%= link_to "Download pattern", @pattern.file %>
+      <%= link_to "Download instructions", @pattern.file %>
     </button>
   <% else %>
 
@@ -86,7 +90,7 @@
       <%# if pattern is free %>
     <% elsif user_signed_in?  %>
       <button >
-        <%= link_to "Download pattern", @pattern.file %>
+        <%= link_to "Download instructions", @pattern.file %>
       </button>
 
       <%# if user is not logged in %>
@@ -96,7 +100,7 @@
         to purchase this pattern </p>
     <% end %>
   <% end %>
-  
+
   <%# if user owns the pattern and is a seller%>
   <% if user_signed_in? && current_user.id == @pattern.user_id && current_user.is_seller %>
     <p><%= link_to 'Edit', edit_pattern_path(@pattern) %> |

@@ -7,8 +7,6 @@ class PatternsController < ApplicationController
   #for sellers
   before_action :authorise_new, only: %i[new create]
 
-  # GET /patterns
-  # GET /patterns.json
   def index
     @patterns = Pattern.all
     if user_signed_in?
@@ -20,8 +18,6 @@ class PatternsController < ApplicationController
     end
   end
 
-  # GET /patterns/1
-  # GET /patterns/1.json
   def show
     if @pattern.price != 0.0 && user_signed_in? 
       session = Stripe::Checkout::Session.create(
@@ -44,32 +40,19 @@ class PatternsController < ApplicationController
         success_url: "#{root_url}transactions/success?user_id=#{current_user.id}&pattern_id=#{@pattern.id}&price=#{@pattern.price}",
         cancel_url: "#{root_url}patterns"
       )
-
       @session_id = session.id
     end
   end
 
-  # GET /patterns/new
   def new
     @pattern = Pattern.new
   end
 
-  # GET /patterns/1/edit
   def edit; end
 
-  # POST /patterns
-  # POST /patterns.json
   def create
     @pattern = current_user.patterns.create(pattern_params)
     respond_to do |format|
-      # p "@pattern.valid?#{@pattern.valid?}"
-        
-
-      # temp_var = @pattern.save
-      # p "------------------yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
-      # p temp_var
-      # p "@pattern.errors #{@pattern.errors}"
-
       if @pattern.save
         format.html { redirect_to @pattern, notice: 'Pattern was successfully created.' }
         format.json { render :show, status: :created, location: @pattern }
@@ -80,8 +63,6 @@ class PatternsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /patterns/1
-  # PATCH/PUT /patterns/1.json
   def update
     respond_to do |format|
       if @pattern.update(pattern_params)
@@ -94,8 +75,6 @@ class PatternsController < ApplicationController
     end
   end
 
-  # DELETE /patterns/1
-  # DELETE /patterns/1.json
   def destroy
     @pattern.pictures.purge
     @pattern.file.purge

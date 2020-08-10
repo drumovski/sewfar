@@ -4,18 +4,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
-  # GET /resource/sign_up
   def new
     super
   end
 
-  # POST /resource
   def create
-    p "______________-before super________________________"
     super
-    p "______________-after super________________________"
-    p "@user.valid?#{@user.valid?}"
-    p "@user.errors #{@user.errors}"
   end
 
   # GET /resource/edit
@@ -23,31 +17,30 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # PUT /resource
   def update
     super
   end
 
-  # DELETE /resource
   def destroy
-   #make all patterns the user owns free
-   @user.patterns.each do |pattern|
-     pattern.price = 0
-     pattern.save
-   end
-    @user.picture.purge
-    if @user.seller
-      @user.seller.destroy
+    # make all patterns the user owns free
+    @user.patterns.each do |pattern|
+      pattern.price = 0
+      pattern.save
     end
-    #used soft delete method due to patterns needing to remain active if people have purchesed them
+
+    # remove avatar pictures from amazon S3
+    @user.picture.purge
+
+    #remove any seller account attached
+    @user.seller&.destroy
+
+    # used soft delete method due to patterns needing to remain active if people have purchesed them
     @user.soft_delete
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
     set_flash_message :notice, :destroyed
     yield resource if block_given?
-    respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+    respond_with_navigational(resource) { redirect_to after_sign_out_path_for(resource_name) }
   end
-
-
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -58,7 +51,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
