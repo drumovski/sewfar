@@ -1,6 +1,6 @@
 <h1 class = "heading-text">Edit Pattern</h1>
-
-<%= render 'form', pattern: @pattern %>
-
-<%= link_to 'Show', @pattern %> |
-<%= link_to 'Back', patterns_path %>
+<div class = "basic-form-box">
+  <%= render 'form', pattern: @pattern %>
+  <%= link_to 'View', @pattern %> |
+  <%= link_to 'Back', patterns_path %>
+</div>

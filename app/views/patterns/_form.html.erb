@@ -1,82 +1,94 @@
  <%#  page is partial for creating / editing patterns %>
 
-<div class = "basic-form-box">
-  <%= form_with(model: pattern, local: true) do |form| %>
-    
-    <%#  error recovery %>
-    <% if pattern.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(pattern.errors.count, "error") %> prohibited this pattern from being saved:</h2>
-        <ul>
-          <% pattern.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    
-    <%#  input fields %>
-    <div class="field">
-      <%= form.label :name %>
-      <%= form.text_field :name, required: true %>
-    </div>
-    <div class="field">
-      <%= form.label :sizes %>
-      <%= form.text_field :sizes, required: true %>
-    </div>
-    <div class="field">
-      <%= form.label :fabric %>
-      <%= form.text_field :fabric %>
-    </div>
-    <div class="field">
-      <%= form.label :fabric_amount_in_cm %>
-      <%= form.number_field :fabric_amount %>
-    </div>
-    <div class="field">
-      <%= form.label :garment %>
-      <%= collection_select :pattern, :garment_id, Garment.all, :id, :name %>
-    </div>
-    <div class="field">
-      <%= form.label :category %>
-      <%= form.select :category, ['women', 'men', 'unisex', 'kids', 'toys'] %>
-    </div>
-    <div class="field">
-      <%= form.label :price %>
-      <%= form.text_field :price, required: true %>
-    </div>
-    <div class="field">
-      <%= form.label :description %>
-      <%= form.text_area :description, required: true %>
-    </div>
-    <div class="field">
-      <%= form.label :difficulty %>
-      <%= form.select :difficulty, ['easy', 'medium', 'hard'] %>
-    </div>
-    <div class="field">
-      <%= form.label :notions %>
-      <%= form.text_area :notions %>
-    </div>
-    
-    <%#  active storage fields %>
-    <div class="field">
-      <%= form.label :pictures %>
-      <%= form.file_field :pictures, multiple: true, accept: 'image/jpg, image/png, image/gif, image/jpeg' %>
-    </div>
-    <div class="field">
-      <%= form.label :file %>
-      <%= form.file_field :file, accept: 'file/pdf' %>
-      <% if pattern.file.attached? %>
-        <p>1 file currently attached</p>
-      <% end %>
-    </div>
-    <% if !pattern.complete %>
-      <div class="field">
-        <%= form.label :complete %>
-        <%= form.check_box :complete %>
-      </div>
-    <% end %>
-    <div class="actions">
-      <%= form.submit %>
+<%= form_with(model: pattern, local: true) do |form| %>
+
+  <%#  error recovery %>
+  <% if pattern.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pattern.errors.count, "error") %> prohibited this pattern from being saved:</h2>
+      <ul>
+        <% pattern.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
-</div>
+
+  <%#  input fields %>
+  <div class="field">
+    <%= form.label :name, 'Pattern name' %>
+    <%= form.text_field :name, required: true %>
+  </div>
+  <div class="field">
+    <%= form.label :sizes %>
+    <%= form.text_field :sizes, required: true %>
+  </div>
+  <div class="field">
+    <%= form.label :fabric %>
+    <%= form.text_field :fabric %>
+  </div>
+  <div class="field">
+    <%= form.label :fabric_amount, 'Fabric needed in cm' %>
+    <%= form.number_field :fabric_amount %>
+  </div>
+  <div class="field">
+    <%= form.label :garment %>
+    <%= collection_select :pattern, :garment_id, Garment.all, :id, :name %>
+  </div>
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.select :category, ['women', 'men', 'unisex', 'kids', 'toys'] %>
+  </div>
+  <div class="field">
+    <%= form.label :price, 'Price $' %>
+    <%= form.text_field :price, required: true %>
+  </div>
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, required: true %>
+  </div>
+  <div class="field">
+    <%= form.label :difficulty %>
+    <%= form.select :difficulty, ['easy', 'medium', 'hard'] %>
+  </div>
+  <div class="field">
+    <%= form.label :notions %>
+    <%= form.text_area :notions %>
+  </div>
+
+  <%#  active storage fields %>
+  
+        <% if pattern.pictures.attached? %>
+        <div>
+        <p>Current pictures:</p>
+        <% pattern.pictures.each do |picture|%>
+          <%= image_tag picture.variant(resize_to_limit: [60, 60]) %>
+          <% end %>
+          </div>
+          <br>
+          <div class="field">
+    <%= form.label :pictures, 'Pictures (max 6)' %>
+    <%= form.file_field :pictures, multiple: true, accept: 'image/jpg, image/png, image/gif, image/jpeg' %>
+
+    <% end %>
+  </div>
+  <div class="field">
+      <% if pattern.file.attached? %>
+      <p>Current instruction file</p>
+      <div><%= image_tag pattern.file.preview(resize_to_limit: [60, 60]) %></div>
+    <% end %>
+    <br>
+    <%= form.label :file, 'File instructions (pdf)' %>
+    <%= form.file_field :file, accept: 'application/pdf' %>
+
+  </div>
+  <% if !pattern.complete %>
+    <div class="field">
+      <%= form.label :complete %>
+      <%= form.check_box :complete %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

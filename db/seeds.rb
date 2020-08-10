@@ -78,7 +78,7 @@ def populate_sellers
         :postcode              => "3000",
         :user_id               => User.find_by(name: n.titleize).id
          )
-        seller.save!(validate:false)
+        seller.save!
         u = User.find_by(name: n.titleize)
         u.is_seller = true
         u.save!
@@ -88,6 +88,7 @@ end
 def populate_patterns
     people = ["Zeb", "Zeb", "Zeb", "Zeb", "Jake", "Jake", "Jake", "Carl", "Carl", "John" ]
     i = 1
+    clothes_counter = 1
     people.each do |n|
       puts "pattern created by #{n}"
       pattern = Pattern.new(
@@ -104,8 +105,27 @@ def populate_patterns
         :complete            => true,
         :user_id             => User.find_by(name: n).id
          )
-
-        pattern.save!(validate:false)
+        4.times do
+         clothes1 = "clothes/#{clothes_counter}.jpg"
+         clothes2 = "#{clothes_counter}.jpg"
+              pattern.pictures.attach(
+                  io: File.open(clothes1),
+                  filename: clothes2,
+                  content_type: 'image/jpg',
+                  identify: false
+              )
+                 puts "added #{clothes1} to #{pattern.name}, clothes_counter = #{clothes_counter}"
+                clothes_counter += 1
+                clothes_counter = 1 if clothes_counter > 30
+        end
+                pattern.file.attach(
+                    io: File.open('patterns/pattern.pdf'),
+                    filename: 'pattern.pdf',
+                    content_type: 'application/pdf',
+                    identify: false
+                )
+                   puts "added pattern pdf to #{pattern.name}, i = #{i}"               
+        pattern.save!
         i += 1
      end
 end
@@ -134,13 +154,16 @@ def attach_pictures_to_patterns
     patterns.each do |pattern|
     string1 = "clothes/#{i}.jpg"
     string2 = "#{i}.jpg"
+    p "string1 is #{string1}"
+    p "string2 is #{string2}"
          pattern.pictures.attach(
              io: File.open(string1),
              filename: string2,
              content_type: 'image/jpg',
              identify: false
          )
-            puts "added clothes image to #{pattern.name}, i = #{i}"
+         p "pattern.pictures.any? #{pattern.pictures.any?}"
+            puts "tried to add clothes image to #{pattern.name}, i = #{i}"
            i += 1
            i = 1 if i > 30
      end
@@ -153,7 +176,7 @@ def attach_files_to_patterns
          pattern.file.attach(
              io: File.open('patterns/pattern.pdf'),
              filename: 'pattern.pdf',
-             content_type: 'file/pdf',
+             content_type: 'application/pdf',
              identify: false
          )
             puts "added pattern pdf to #{pattern.name}, i = #{i}"
@@ -197,7 +220,7 @@ populate_users
 populate_sellers
 populate_patterns
 attach_pictures_to_users
-attach_pictures_to_patterns
-attach_files_to_patterns
+#attach_pictures_to_patterns
+#attach_files_to_patterns
   
   

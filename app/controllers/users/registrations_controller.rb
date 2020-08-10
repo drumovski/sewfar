@@ -11,7 +11,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
+    p "______________-before super________________________"
     super
+    p "______________-after super________________________"
+    p "@user.valid?#{@user.valid?}"
+    p "@user.errors #{@user.errors}"
   end
 
   # GET /resource/edit

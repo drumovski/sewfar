@@ -1,4 +1,5 @@
 <h1 class = "heading-text" >New Pattern</h1>
-
-<%= render 'form', pattern: @pattern %>
-
+<div class = "basic-form-box">
+  <%= render 'form', pattern: @pattern %>
+  <%= link_to 'Back', patterns_path %>
+</div>
