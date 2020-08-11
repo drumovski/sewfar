@@ -32,6 +32,7 @@
     <%= form.number_field :fabric_amount %>
   </div>
   <div class="field">
+  <%# list of garments from garment table %>
     <%= form.label :garment %>
     <%= collection_select :pattern, :garment_id, Garment.all, :id, :name %>
   </div>
@@ -73,6 +74,7 @@
     <%= form.label :file, 'File instructions (pdf)' %>
     <%= form.file_field :file, accept: 'application/pdf' %>
   </div>
+  <%# allow seller to half finish editing pattern before showing up in all patterns %>
   <% if !pattern.complete %>
     <div class="field">
       <%= form.label :complete %>

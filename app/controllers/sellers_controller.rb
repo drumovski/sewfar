@@ -5,32 +5,29 @@ class SellersController < ApplicationController
   #admin and the seller themselves only
   before_action :authorise_change, only: [:edit, :update, :destroy]
 
-  # GET /sellers
-  # GET /sellers.json
-  def index
+
+  def index # admin use only (for seeing/editing all users and sellers)
     @sellers = Seller.all
     @users = User.all
   end
 
-  # GET /sellers/1
-  # GET /sellers/1.json
   def show
   end
 
-  # GET /sellers/new
   def new
     @seller = Seller.new
   end
 
-  # GET /sellers/1/edit
   def edit
   end
 
-  # POST /sellers
-  # POST /sellers.json
   def create    
     @seller = Seller.new(seller_params)
+
+    #create link between seller and user
     @seller.user_id = current_user.id
+
+    #error checking before save
     respond_to do |format|
       if @seller.save
         @seller.user.is_seller = true
@@ -44,9 +41,8 @@ class SellersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /sellers/1
-  # PATCH/PUT /sellers/1.json
   def update
+    #error checking before save
     respond_to do |format|
       if @seller.update(seller_params)
         @seller.user.is_seller = true
@@ -60,17 +56,21 @@ class SellersController < ApplicationController
     end
   end
 
-  # DELETE /sellers/1
-  # DELETE /sellers/1.json
   def destroy
+    #boolean for seller check
     @seller.user.is_seller = false
     @seller.user.save
+
     #make all patterns the user owns free due to patterns needing to remain active if people have purchesed them
     @seller.user.patterns.each do |pattern|
       pattern.price = 0
       pattern.save
     end
+
+    #delete seller
     @seller.destroy
+
+    #confirmation message
     respond_to do |format|
       format.html { redirect_to patterns_path, notice: 'Seller was successfully destroyed.' }
       format.json { head :no_content }
@@ -89,15 +89,13 @@ class SellersController < ApplicationController
       params.require(:seller).permit(:business_name, :abn, :website, :facebook, :twitter, :linkedin, :instagram, :about, :address_line_1, :address_line_2, :city, :postcode, :country)
     end
 
-    #authorise admin use only
-    def authorise_index
+    def authorise_index #authorise admin use only (for seeing all users and sellers)
       if !user_signed_in? || (user_signed_in? && !current_user.admin)
         redirect_to patterns_path
      end
     end
 
-    #authorise admin and the seller themselves
-    def authorise_change
+    def authorise_change #authorise admin and the seller themselves only
       if !user_signed_in? || (@seller.user_id != current_user.id && !current_user.admin)
         redirect_to patterns_path
       end

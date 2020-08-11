@@ -22,7 +22,7 @@
   <tbody>
     <% @sellers.each do |seller| %>
       <tr>
-        <td><%= User.find(seller.user_id).name %></td>  
+        <td><%= seller.user.name %></td>  
         <td><%= seller.business_name %></td>
         <td><%= seller.abn %></td>
         <td><%= seller.website %></td>

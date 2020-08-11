@@ -8,20 +8,18 @@ class PatternsController < ApplicationController
   before_action :authorise_new, only: %i[new create]
 
   def index
-    @patterns = Pattern.all
-    p "777777777777777777777777777777777777777777777777777777777"
-    p "@patterns = #{@patterns}"
+    #send all patterns plus eager loading transactions, garment, user and seller
+    @patterns = Pattern.includes(:transactions, :garment, :user => :seller).all
+    #compile and send all patterns the current user has purchased
     if user_signed_in?
-      @bought_patterns = []
-      current_user.transactions.each do |transaction|
-        @bought_patterns << transaction.pattern
-      end
-      @bought_patterns 
-      # @bought_patterns = current_user.transactions.patterns.all
+      @bought_patterns = @patterns.where(id: Transaction.select(:pattern_id).where(user_id: current_user))
+      # compile and send all patterns created by the user
+      @user_patterns = @patterns.where(user_id: current_user)
     end
   end
 
   def show
+    # stripe code *unless the pattern is free
     if @pattern.price != 0.0 && user_signed_in? 
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
@@ -55,7 +53,7 @@ class PatternsController < ApplicationController
 
   def create
     @pattern = current_user.patterns.create(pattern_params)
-    p @pattern
+    #error checking before save
     respond_to do |format|
       if @pattern.save
         format.html { redirect_to @pattern, notice: 'Pattern was successfully created.' }
@@ -68,6 +66,7 @@ class PatternsController < ApplicationController
   end
 
   def update
+    #error checking before save
     respond_to do |format|
       if @pattern.update(pattern_params)
         format.html { redirect_to @pattern, notice: 'Pattern was successfully updated.' }
@@ -80,8 +79,11 @@ class PatternsController < ApplicationController
   end
 
   def destroy
+    #remove all pictures from amazon S3
     @pattern.pictures.purge
+    #remove all files from amazon S3
     @pattern.file.purge
+    #delete the pattern
     @pattern.destroy
     respond_to do |format|
       format.html { redirect_to patterns_url, notice: 'Pattern was successfully destroyed.' }
@@ -96,13 +98,13 @@ class PatternsController < ApplicationController
     @pattern = Pattern.find(params[:id])
   end
 
-  def authorise_change
+  def authorise_change  #for admin and pattern owners
     if (@pattern.user_id != current_user.id && !current_user.admin) || (!current_user.is_seller && !current_user.admin)
       redirect_to patterns_path
     end
   end
 
-  def authorise_new
+  def authorise_new #for sellers
     redirect_to patterns_path unless current_user.is_seller
   end
 

@@ -1,26 +1,28 @@
-<%#  page partial for displaying patterns owned, bought and all patterns %>
+<%# page partial for displaying patterns owned, bought and all patterns %>
+
 <div class="patterns-container">
   <% patterns.each do |pattern| %>
     <div class="pattern-box">
-
-      <%#  wont show if pattern is not complete unless its the owner of the pattern %>
+      <%# wont show if pattern is not complete unless its the owner of the pattern %>
       <% if pattern.complete or (user_signed_in? && current_user.id == pattern.user_id) %>
         <ul class = "pattern-details">
           <li class = 'pattern-title'><%= pattern.name %></li>
 
-          <%#  Show first image of pattern %>
-          <%# <% if pattern.pictures.attached? %>
+          <%# Show first image of pattern (validation ensures at least one image) %>
             <li class = "pattern-thumb">
                <%= image_tag pattern.pictures.first.variant(resize_to_limit: [200, 200]) %>
             </li>
-          <%# <% end %>
 
-          <%#  Show pattern details %>
-          <% if User.find(pattern.user_id).seller%>
-            <li>By: <%= User.find(pattern.user_id).seller.business_name %></li>
+          <%# Show pattern details %>
+
+          <%# if the pattern has a valid seller %>
+          <% if pattern.user.is_seller?%>
+            <%# display seller business name %>
+            <li>By: <%= pattern.user.seller.business_name %></li>
           <% end %>
           <li>For sizes: <%= pattern.sizes %></li>
-          <li>Type: <%= Garment.find(pattern.garment_id).name %></li>
+          <%# display correct garment name from garment_id %>
+          <li>Type: <%= pattern.garment.name %></li>
           <li>For: <%= pattern.category %></li>
           <li>Description: <%= pattern.description %></li>
           <li>Difficulty: <%= pattern.difficulty %></li>

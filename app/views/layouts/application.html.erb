@@ -6,15 +6,17 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%#load all fonts from google fonts%>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&family=Roboto&family=Ruthie&display=swap" rel="stylesheet"> 
   </head>
   <body>
 
-    <%#  navbar %>
+    <%# navbar %>
 
-    <%#  avatar + welcome %>
+    <%# avatar + welcome %>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
       <% if user_signed_in? %>
+        <%#  display avatar at 60x60 or display default img %>
         <% if current_user.picture.attached? %>
           <picture class = "avatar">
           <%= image_tag current_user.picture.variant(resize_to_limit: [60, 60]) %>
@@ -22,6 +24,7 @@
         <% else %>
           <%= image_tag "default-avatar.png"%>
         <% end %>
+          <%# welcome message%>
         Welcome <%= current_user.name %>
       <% end %>
 
@@ -68,10 +71,10 @@
     </nav>
     <%#  end of navbar %>
 
-    <%#  Sew Far Logo (text) %>
+    <%#  Sew Far Logo text (font from googlefonts) %>
     <h1 class="text-center sew-far-logo">Sew Far</h1>
 
-    <%#  Error / confirmation messages %>
+    <%#  Errors / all confirmation messages from all pages here%>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 

@@ -4,22 +4,18 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   before_save :capital_letter_name
-  validates_uniqueness_of :username
-  validates_confirmation_of :active
-  devise :database_authenticatable, :registerable,
-         :rememberable, :validatable
+
   has_many :patterns
   has_one :seller
   has_one_attached :picture
   has_many :transactions
+
+  validates_uniqueness_of :username
+  validates_confirmation_of :active
   validate :avatar_type
 
-  # def self.make_patterns_free
-  #   current_user.patterns.each do |pattern|
-  #     pattern.price = 0
-  #   end
-  #   current_user.save
-  # end
+  devise :database_authenticatable, :registerable,
+         :rememberable, :validatable
 
   # soft delete used due to wanting to keep any patterns from being orphaned.
 
@@ -45,17 +41,14 @@ class User < ApplicationRecord
 
   private
 
+  # custom validation for avatar
   def avatar_type
-    puts '+++++++++++++++++++++++++++++++++++in avatar_type++++++++++++++++++++'
-    puts '+++++++++++++++++++++++++++++++++++in second loop++++++++++++++++++++'
+    #avatar must be one jpg, jpeg or png
     if picture.attached? == true
       puts "image content type is #{picture.content_type}"
       unless picture.content_type.in?(%('image/jpeg image/png image/jpg'))
-        puts '+++++++++++++++++++++++++++++++++++in third loop++++++++++++++++++++'
         errors.add(:base, 'picture needs to be a jpg, jpeg or png')
-        puts '=========================================================='
-  end
-end
-    puts "picture errors? #{errors.any?}"
+      end
     end
+  end
 end

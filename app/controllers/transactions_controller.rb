@@ -18,6 +18,7 @@ class TransactionsController < ApplicationController
         p "price " + price              #price paid 
         head :ok
 
+        #create successful transaction only after webhook return
         transaction = Transaction.create(user_id: user_id, pattern_id: pattern_id, price: price, successful: true)
         transaction.save   
     end

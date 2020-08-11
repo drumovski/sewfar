@@ -14,6 +14,8 @@
 @import "bootstrap";
 @import "partials/*";
 
+
+//global
 body {
     padding-top: 75px;
     font-family: 'EB Garamond', serif;
@@ -21,6 +23,7 @@ body {
     background-color: $white;
 }
 
+//navbar
 .navbar {
     background-color: $aqua;
     font-family: 'Roboto', sans-serif;
@@ -38,8 +41,7 @@ body {
     }
 }
 
-
-
+//banner
 .sew-far-logo {
     font-size: 140px;
     font-family: 'Ruthie', cursive;
@@ -77,7 +79,6 @@ body {
     height: 550px;
     padding: 10px;
     margin: 10px;
-
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -92,14 +93,13 @@ body {
             font-size: 1.3em;
         }
     }
-
 }
 
 .pattern_title {
     font-size: 1.3em;
 }
 
-// most views have this box
+// general pages styling
 .basic-form-box {
     background-color: $pink;
     max-width: 80%;
@@ -121,6 +121,8 @@ body {
         margin: 5px;
     }
 }
+
+//admin page
 .sellers-index-container {
     background-color: $pink;
     max-width: 90%;
@@ -130,11 +132,12 @@ body {
     box-shadow: 10px 10px 5px 0px rgba(135, 135, 135, 1);
 }
 
+//media queries
+
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
     .basic-form-box {
         max-width: 40%;
-
     }
 }
 
