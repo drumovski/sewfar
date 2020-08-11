@@ -44,8 +44,9 @@
     <strong>Country:</strong>
     <%= @seller.country %>
   </p>
-  <% if user_signed_in? && current_user.id == @seller.user_id && current_user.is_seller %>
-  <%= link_to 'Edit', edit_seller_path(@seller) %> |
-  <% end %>
-  <%= link_to 'Back', patterns_path %>
+  <div class = "links"></div>
+    <% if user_signed_in? && current_user.id == @seller.user_id && current_user.is_seller %>
+      <span class = "link"><%= link_to 'Edit', edit_seller_path(@seller) %></span>
+    <% end %>
+    <span class = "link"><%= link_to 'Home', patterns_path %></span>
 </div>

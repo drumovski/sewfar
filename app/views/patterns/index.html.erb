@@ -3,8 +3,8 @@
   <%# show patterns if the current seller has patterns they have created %>
   <% if user_signed_in? && current_user.patterns.any? %>
     <h2 class = "heading-text">Your Patterns</h2>
-    <% user_patterns = current_user.patterns.all %>
-    <%= render partial: "patterns", object: user_patterns, as: 'patterns' %>
+    <% @user_patterns = current_user.patterns.all%>
+    <%= render partial: "patterns", object: @user_patterns, as: 'patterns' %>
   <% end %>
 
 

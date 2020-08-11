@@ -58,16 +58,6 @@
 
   <%#  active storage fields %>
 
-  <%# preview pictures %>
-  <% if pattern.pictures.attached? %>
-    <div>
-      <p>Current pictures:</p>
-      <% pattern.pictures.each do |picture|%>
-        <%= image_tag picture.variant(resize_to_limit: [60, 60]) %>
-      <% end %>
-    </div>
-  <% end %>
-  <br>
   <div class="field">
     <%= form.label :pictures, 'Pictures (max 6)' %>
     <%= form.file_field :pictures, multiple: true, accept: 'image/jpg, image/png, image/gif, image/jpeg' %>

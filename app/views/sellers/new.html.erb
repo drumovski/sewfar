@@ -1,6 +1,8 @@
 <%# page for New sellers %>
 <h1 class = "heading-text" >New Seller</h1>
 <div class = "basic-form-box">
-<%= render 'form', seller: @seller %>
-<%= link_to 'Back', sellers_path %>
+  <%= render 'form', seller: @seller %>
+  <div class = "links">
+    <span class = "link"><%= link_to 'Back', @patterns_path %></span>
+  </div>
 </div>

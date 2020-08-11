@@ -24,6 +24,7 @@ body {
 .navbar {
     background-color: $aqua;
     font-family: 'Roboto', sans-serif;
+
     .avatar {
         margin-right: 5px;
     }
@@ -31,7 +32,7 @@ body {
     .navbar-toggler {
         background-color: $blue;
     }
-    
+
     .top-item {
         padding-left: 20px;
     }
@@ -50,13 +51,15 @@ body {
     border-bottom: solid $blue 3px;
     font-family: 'Roboto', sans-serif;
 }
+
 .basic-index-link {
-    padding: 10px; 
+    padding: 10px;
 }
 
 .heading-text {
     padding: 10px;
 }
+
 // pattern page styling
 .patterns-container {
     margin: auto;
@@ -74,13 +77,13 @@ body {
     height: 550px;
     padding: 10px;
     margin: 10px;
-    
+
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
-    -moz-box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
-    box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(135, 135, 135, 1);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(135, 135, 135, 1);
+    box-shadow: 10px 10px 5px 0px rgba(135, 135, 135, 1);
 
     .pattern-details {
         list-style: none;
@@ -89,15 +92,7 @@ body {
             font-size: 1.3em;
         }
     }
-    .pattern-links {
-        margin-top: auto;
-        text-align: center;
-        font-family: 'Roboto', sans-serif;
 
-        .pattern-link {
-            margin: 5px;
-        }
-    }
 }
 
 .pattern_title {
@@ -106,23 +101,33 @@ body {
 
 // most views have this box
 .basic-form-box {
-      background-color: $pink;
-      max-width: 80%;
-      margin: auto;
-      text-align: center;
-      padding: 20px;
-      -webkit-box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
-      -moz-box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
-      box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
+    background-color: $pink;
+    max-width: 80%;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(135, 135, 135, 1);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(135, 135, 135, 1);
+    box-shadow: 10px 10px 5px 0px rgba(135, 135, 135, 1);
+
 }
 
+.links {
+    margin-top: auto;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+
+    .link {
+        margin: 5px;
+    }
+}
 .sellers-index-container {
     background-color: $pink;
     max-width: 90%;
     margin: auto;
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
-      -moz-box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
-      box-shadow: 10px 10px 5px 0px rgba(135,135,135,1);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(135, 135, 135, 1);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(135, 135, 135, 1);
+    box-shadow: 10px 10px 5px 0px rgba(135, 135, 135, 1);
 }
 
 /* Large desktops and laptops */
@@ -130,7 +135,7 @@ body {
     .basic-form-box {
         max-width: 40%;
 
-  }
+    }
 }
 
 /* Landscape tablets and medium desktops */

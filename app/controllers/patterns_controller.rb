@@ -9,12 +9,15 @@ class PatternsController < ApplicationController
 
   def index
     @patterns = Pattern.all
+    p "777777777777777777777777777777777777777777777777777777777"
+    p "@patterns = #{@patterns}"
     if user_signed_in?
       @bought_patterns = []
       current_user.transactions.each do |transaction|
         @bought_patterns << transaction.pattern
       end
-      @bought_patterns
+      @bought_patterns 
+      # @bought_patterns = current_user.transactions.patterns.all
     end
   end
 
@@ -52,6 +55,7 @@ class PatternsController < ApplicationController
 
   def create
     @pattern = current_user.patterns.create(pattern_params)
+    p @pattern
     respond_to do |format|
       if @pattern.save
         format.html { redirect_to @pattern, notice: 'Pattern was successfully created.' }

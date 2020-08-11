@@ -5,7 +5,6 @@
       <%= @pattern.name %>
     </strong>
   </p>
-
   <%# if the pattern has a valid creator %>
   <% if @pattern.user.seller %>
     <p>
@@ -56,14 +55,12 @@
       <%= @pattern.notions %>
     </p>
   <% end %>
-
   <%# if pattern is already purchased by the user %>
   <% if user_signed_in? && current_user.transactions.where(pattern_id: @pattern.id).size > 0 %>
     <button >
       <%= link_to "Download instructions", @pattern.file %>
     </button>
   <% else %>
-
     <%# if pattern has a price, use stripe. otherwise just download the pattern %>
     <% if @pattern.price != 0 && user_signed_in? %>
       <button data-stripe="payment">
@@ -82,13 +79,11 @@
             });
           });
       </script>
-
       <%# if pattern is free %>
     <% elsif user_signed_in?  %>
       <button >
         <%= link_to "Download instructions", @pattern.file %>
       </button>
-
       <%# if user is not logged in %>
     <% else %>
       <p> <%= link_to "Log in", new_user_session_path %>
@@ -97,10 +92,18 @@
     <% end %>
   <% end %>
 
+
   <%# if user owns the pattern and is a seller%>
-  <% if user_signed_in? && current_user.id == @pattern.user_id && current_user.is_seller %>
-    <p><%= link_to 'Edit', edit_pattern_path(@pattern) %> |
-      <%= link_to 'New', new_pattern_path %> </p>
+  <div class = "links">
+  <br>
+  <% if user_signed_in? && (current_user.id == @pattern.user_id && current_user.is_seller || current_user.admin) %>
+    <span class = "link"><%= link_to 'Edit', edit_pattern_path(@pattern) %></span>
+
+    <%#  Allow deletion if pattern is incomplete or not bought by anyone %>
+    <% if !@pattern.complete || !@pattern.transactions.any? %>
+      <span class = "link"><%= link_to 'Delete', @pattern, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+    <% end %>
   <% end %>
-  <%= link_to 'Home', patterns_path %>
+  <span class = "link"><%= link_to 'Home', patterns_path %></span>
+  </div>
 </div>

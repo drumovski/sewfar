@@ -1,5 +1,7 @@
 <h1 class = "heading-text" >New Pattern</h1>
 <div class = "basic-form-box">
   <%= render 'form', pattern: @pattern %>
-  <%= link_to 'Back', patterns_path %>
+  <div class = "links">
+    <span class = "link"><%= link_to 'Home', patterns_path %></span>
+  </div>
 </div>

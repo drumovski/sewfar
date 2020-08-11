@@ -1,6 +1,14 @@
 <h1 class = "heading-text">Edit Pattern</h1>
 <div class = "basic-form-box">
   <%= render 'form', pattern: @pattern %>
-  <%= link_to 'View', @pattern %> |
-  <%= link_to 'Back', patterns_path %>
+
+  <div class = "links">
+    <span class = "link"><%= link_to 'View', @pattern %></span>
+    
+    <%#  Allow deletion if pattern is incomplete or not bought by anyone %>
+    <% if !@pattern.complete || !@pattern.transactions.any? %>
+      <span class = "link"><%= link_to 'Delete', @pattern, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+    <% end %>
+    <span class = "link"><%= link_to 'Home', patterns_path %></span>
+  </div>
 </div>
